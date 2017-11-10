@@ -36,14 +36,12 @@ export class AuthService {
     private router: Router,
     private alertService: AlertService) {
 
-    if (this.authenticated) {
-      this.setLoggedIn(true);
-    }
-    // this.blogsURL = ENV.BASE_API;
-    // this.userState = new BehaviorSubject<Boolean>(false);//init BehaviorSubject
-
+          if (this.authenticated) {
+            this.setLoggedIn(true);
+          }
 
   }
+
   setLoggedIn(value: boolean) {
     this.loggedIn$.next(value);
     this.loggedIn = value;
