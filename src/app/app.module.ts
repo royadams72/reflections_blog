@@ -18,6 +18,9 @@ import { BlogsService } from './services/blogs.service';
 import { AuthService } from './services/auth.service';
 import { IsloggedinGuard } from './routing/isloggedin.guard';
 import { AlertService } from './components/alert/alert.service';
+
+// material
+// import {MatTableDataSource, MatSort} from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,9 @@ import { AlertService } from './components/alert/alert.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    routing
+    routing,
+    // MatTableDataSource,
+    // MatSort
   ],
   providers: [
     BlogsService,

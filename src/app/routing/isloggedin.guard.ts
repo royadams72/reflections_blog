@@ -17,6 +17,7 @@ export class IsloggedinGuard {
 
   canActivate() {
     this.isLoggedIn$ = this.authService.loggedIn$
+    console.log(this.isLoggedIn$)
     if (this.isLoggedIn$) {
       return true;
     } else {

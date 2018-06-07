@@ -8,8 +8,7 @@ import 'rxjs/add/observable/throw';
 export class TokenInterceptor implements HttpInterceptor {
   constructor() { }
 
-  intercept(req: HttpRequest<any>,
-    next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem("token");
     // console.log(token)
     if (token) {
