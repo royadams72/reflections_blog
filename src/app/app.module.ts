@@ -18,7 +18,7 @@ import { BlogsService } from './services/blogs.service';
 import { AuthService } from './services/auth.service';
 import { IsloggedinGuard } from './routing/isloggedin.guard';
 import { AlertService } from './components/alert/alert.service';
-
+import { StoreModule } from '@ngrx/store';
 // material
 // import {MatTableDataSource, MatSort} from '@angular/material';
 @NgModule({
