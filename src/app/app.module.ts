@@ -19,8 +19,15 @@ import { AuthService } from './services/auth.service';
 import { IsloggedinGuard } from './routing/isloggedin.guard';
 import { AlertService } from './components/alert/alert.service';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 // material
 // import {MatTableDataSource, MatSort} from '@angular/material';
+
+export const reducers = {
+  
+  };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +44,8 @@ import { StoreModule } from '@ngrx/store';
     FormsModule,
     ReactiveFormsModule,
     routing,
+    StoreModule.forRoot(reducers, {initialState: undefined}),
+    StoreDevtoolsModule.instrument({maxAge: 25})
     // MatTableDataSource,
     // MatSort
   ],
