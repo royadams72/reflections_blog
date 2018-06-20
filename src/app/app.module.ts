@@ -23,6 +23,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BlogEffects } from './store/effects/blog.effects';
 import {blogs} from './store/reducers/blog.reducer'
+import { CrudModule } from './components/crud-blog/crud.module';
+import { initialState } from './store/app-state';
 // material
 // import {MatTableDataSource, MatSort} from '@angular/material';
 
@@ -46,7 +48,8 @@ export const reducers = {
     FormsModule,
     ReactiveFormsModule,
     routing,
-    StoreModule.forRoot(reducers, {initialState: undefined}),
+    CrudModule,
+    StoreModule.forRoot(reducers, {initialState: initialState}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([
       BlogEffects

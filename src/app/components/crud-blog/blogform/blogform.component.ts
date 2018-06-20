@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
 
-import { BlogsService } from '../../services/blogs.service';
-import { ErrorService } from '../errors/error.service';
-import { Blog } from '../../models/blog';
+import { BlogsService } from '../../../services/blogs.service';
+import { ErrorService } from '../../errors/error.service';
+import { Blog } from '../../../models/blog';
 
 
 @Component({

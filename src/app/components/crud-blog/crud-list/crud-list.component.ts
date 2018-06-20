@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogsService } from '../../services/blogs.service';
-import { Blog } from '../../models/blog';
+import { BlogsService } from '../../../services/blogs.service';
+import { Blog } from '../../../models/blog';
 import 'rxjs/add/operator/mergeMap';
 
 @Component({

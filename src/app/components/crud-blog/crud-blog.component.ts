@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogFormComponent } from '../blogform/blogform.component';
-import { CrudListComponent } from '../crud-list/crud-list.component';
+// import { BlogFormComponent } from '../blogform/blogform.component';
+// import { CrudListComponent } from '../crud-list/crud-list.component';
 
 @Component({
   selector: 'app-crud-blog',
