@@ -27,6 +27,7 @@ export class BlogsService {
   getBlogs() {
     return this.http.get(this.blogsURL + 'blogs')
       .map((res: Response) => {
+        console.log(res)
         this.blogs = res['blogs'];
         return this.blogs;
       })
@@ -35,6 +36,7 @@ export class BlogsService {
   getBlog(id) {
     return this.http.get(this.blogsURL + 'blogs/' + id)
       .map((res: Response) => {
+        console.log(res)
         return res["blog"];
       })
   }

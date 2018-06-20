@@ -21,11 +21,13 @@ import { AlertService } from './components/alert/alert.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { BlogEffects } from './store/effects/blog.effects';
+import {blogs} from './store/reducers/blog.reducer'
 // material
 // import {MatTableDataSource, MatSort} from '@angular/material';
 
 export const reducers = {
-  
+  blogs
   };
 
 @NgModule({
@@ -45,9 +47,11 @@ export const reducers = {
     ReactiveFormsModule,
     routing,
     StoreModule.forRoot(reducers, {initialState: undefined}),
-    StoreDevtoolsModule.instrument({maxAge: 25})
-    // MatTableDataSource,
-    // MatSort
+    StoreDevtoolsModule.instrument({maxAge: 25}),
+    EffectsModule.forRoot([
+      BlogEffects
+    
+    ])
   ],
   providers: [
     BlogsService,

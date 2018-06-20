@@ -5,3 +5,4 @@ export interface Blog {
   vidUrl: String;
   script: String
 }
+
