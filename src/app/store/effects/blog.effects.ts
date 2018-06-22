@@ -18,12 +18,12 @@ export class BlogEffects {
       .ofType<LoadBlogsAction>(LOAD_BLOGS_ACTION)
 
       .switchMap(action => {
-          console.log(action)
+        //   console.log(action)
           return this.blogService.getBlogs()
         })
     // //   .debug("data received via the HTTP request")
     .map(blogs =>  {
-        console.log(blogs)
+        // console.log(blogs)
         return new PopulateBlogsAction(blogs)
     });
    

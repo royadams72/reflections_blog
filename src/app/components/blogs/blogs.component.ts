@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app-state';
 import { LOAD_BLOGS_ACTION } from '../../store/actions/blog.actions';
 import { Observable } from 'rxjs';
+import { getBlogs } from '../../store/selectors/blog.selectors';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -14,11 +15,8 @@ import { Observable } from 'rxjs';
 export class BlogsComponent implements OnInit {
   blogs$:Observable<any>;
   constructor(private  blogsService: BlogsService, private store: Store<AppState>) {
-    this.blogs$ = this.store.select(state=>{
-      console.log(state.blogs)
-       return state.blogs
-      })
-    this.store.dispatch({type: LOAD_BLOGS_ACTION})
+    this.blogs$ = this.store.select(getBlogs)
+  
    }
  
   ngOnInit() {
