@@ -8,32 +8,32 @@
               <form name="crudBlogForm" id="crudBlogForm" novalidate [formGroup]='crudBlogForm'>
                 <div class="form-group  floating-label-form-group controls">
                             <label for="name">Title</label>
-                            <input formControlName="title" type="text" class="form-control" placeholder="Title" id="title" [required]="!crudBlogForm.get('title').valid" value="{{selectedBlog[0]?.title}}">
+                            <input formControlName="title" type="text" class="form-control" placeholder="Title" id="title" [required]="!crudBlogForm.get('title').valid" >
                             <div *ngIf="!crudBlogForm.get('title').valid && crudBlogForm.get('title').touched"
                             class="alert alert-danger">Please enter your Title</div>
                         </div>
                         <div class="form-group floating-label-form-group controls">
                             <label for="name">Video id</label>
-                            <input formControlName="vidUrl" type="text" class="form-control" placeholder="Video id" id="vidUrl" [required]="!crudBlogForm.get('vidUrl').valid" value="{{selectedBlog[0]?.vidUrl}}">
+                            <input formControlName="vidUrl" type="text" class="form-control" placeholder="Video id" id="vidUrl" [required]="!crudBlogForm.get('vidUrl').valid">
                             <div *ngIf="!crudBlogForm.get('vidUrl').valid && crudBlogForm.get('vidUrl').touched"
                             class="alert alert-danger">Please enter your the url of the video</div>
                         </div>
                         <div class="form-group floating-label-form-group controls">
                             <label for="name">Script</label>
-                            <input formControlName="script" type="text" class="form-control" placeholder="script" id="script" [required]="!crudBlogForm.get('script').valid" value="{{selectedBlog[0]?.script}}">
+                            <input formControlName="script" type="text" class="form-control" placeholder="script" id="script" [required]="!crudBlogForm.get('script').valid">
                             <div *ngIf="!crudBlogForm.get('script').valid && crudBlogForm.get('script').touched"
                             class="alert alert-danger">Please enter your the script for the video</div>
                         </div>
-                        <input formControlName="_id" type="hidden"  id="_id" value="{{selectedBlog[0]?._id}}" >
-                        <!-- <input formControlName="index" type="hidden"  id="index"> -->
+                        <input formControlName="_id" type="hidden"  id="_id">
+                        <input formControlName="index" type="hidden"  id="index">
 
                     <br>
                     <div id="success"></div>
-                        <div *ngIf="state === 'CREATING'" class="text-center">
+                        <div *ngIf="blogAction === 'CREATING'" class="text-center">
                             <button type="button" class="btn btn-lg btn-success" (click)="onSubmitForm('CREATING')" [disabled]="!crudBlogForm.valid">Add Entry</button>
                         </div>
                         <div class="container">
-                          <div *ngIf="crudBlogForm.get('_id').length > 0 " class="row text-center">
+                          <div *ngIf="blogAction === 'UPDATING' " class="row text-center">
                           <div class="col-md-6">
                               <button type="button" class="btn btn-lg btn-primary mgb-5" (click)="onSubmitForm('UPDATING')" [disabled]="!crudBlogForm.valid">Update Entry</button>
                           </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy , OnChanges, Output, EventEmitter} from '@angular/core';
 import { BlogsService } from '../../../services/blogs.service';
 import { Blog } from '../../../models/blog';
-import { CrudBlogState } from '../store/reducers/crud-blog.reducer';
+import { BlogUIState } from '../store/crud.state';
 
 
 
@@ -14,13 +14,11 @@ import { CrudBlogState } from '../store/reducers/crud-blog.reducer';
 
 export class CrudListComponent implements OnInit {
   @Input() blogs: Blog[];
-  @Output() blogSelected:EventEmitter<CrudBlogState> = new EventEmitter()
-  constructor(private blogsService: BlogsService) { 
-
-  }
+  @Output() blogSelected:EventEmitter<BlogUIState> = new EventEmitter()
+  constructor() {}
   
 ngOnChanges(){
-  console.log(this .blogs)
+  // console.log(this .blogs)
 }
   ngOnInit() {
     // this.blogs = this.blogsService.getBlogs();

@@ -1,21 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-
-import { BlogsService } from '../../../services/blogs.service';
-import { ErrorService } from '../../errors/error.service';
 import { Blog } from '../../../models/blog';
-import { Store } from '@ngrx/store';
-import { CrudBlogState } from '../store/reducers/crud-blog.reducer';
-import { getSelectedBlog } from '../store/selectors/crud.selectors';
-import { Observable } from 'rxjs';
+import { BlogUIState } from '../store/reducers/crud-blog.reducer';
+
 
 
 @Component({
   selector: 'app-blogform',
   templateUrl: './blogform.component.html',
-  styleUrls: ['./blogform.component.css']
+  styleUrls: ['./blogform.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BlogFormComponent implements OnInit {
   public state: string;
@@ -26,35 +21,30 @@ export class BlogFormComponent implements OnInit {
   public _id: String;
   private connArray: Array<Subscription> = [];
   private index: number;
-  @Input() selectedBlog:any
-  
+  @Input() selectedBlog:BlogUIState
+  @Input() blogAction:string;
   // crudTest$:Observable<crudBlogState>
-  constructor(private blogsService: BlogsService,
-              private errorService: ErrorService
-              ) {
+  constructor() {
 
-    this.state = 'CREATING';
+    // this.state = 'CREATING';
     this.formValid = false;
     this.success = false;
   }
   ngOnInit() {
     this.initForm();
-    // let conn = this.blogsService.populateForm
-    //   .subscribe((data) => {
-    //     if (data) {
-    //       this.state = 'UPDATING';
-    //       let blog: Blog = data.blog;
-    //       this.crudBlogForm.setValue({
-    //         title: blog.title,
-    //         vidUrl: blog.vidUrl,
-    //         script: blog.script,
-    //         _id: blog._id,
-    //         index: data.index
-    //       });
-    //     }
-    //     this.connArray.push(conn);
-
-    //   })
+  }
+  ngOnChanges(){
+    console.log(this.blogAction)
+    console.log(this.crudBlogForm)
+    this.crudBlogForm.patchValue({
+      'title':this.selectedBlog[0].title,
+      'vidUrl': this.selectedBlog[0].vidUrl,
+      'script': this.selectedBlog[0].script,
+      '_id': this.selectedBlog[0]._id,
+      'index': this.selectedBlog[0].index
+    })
+    
+    console.log(this.crudBlogForm.get('title').value)
   }
   private initForm() {
     // let items = [];
@@ -62,30 +52,25 @@ export class BlogFormComponent implements OnInit {
       'title': new FormControl(null, [Validators.required, Validators.minLength(1)]),
       'vidUrl': new FormControl(null, Validators.compose([Validators.required, Validators.minLength(1)])),
       'script': new FormControl(null, [Validators.required, Validators.minLength(1)]),
-      '_id': new FormControl(null)
-      // 'index': new FormControl(null)
+      '_id': new FormControl(null),
+      'index': new FormControl(null)
       
     });
-    this.onChanges()
-    // this.addItemFields();
+ 
   }
 
-  onChanges(): void {
-    console.log(this.crudBlogForm.get('_id').value)
-    this.crudBlogForm.get('vidUrl').valueChanges.subscribe(val => {
-      console.log(val)
-    });
-  }
+
   onSubmitForm(action) {
     let form = this.crudBlogForm
     let title = form.get('title');
     let vidUrl = form.get('vidUrl');
     let script = form.get('script');
     let _id = form.get('_id');
-
+    let index = form.get('index');
     let conn: Subscription;
     // action === 'CREATING' ? vidID = null : vidID = this._id;
     let blog: Blog = { _id: _id.value, title: title.value, vidUrl: vidUrl.value, script: script.value }
+    console.log(blog)
     // if (action === 'CREATING') {
     //   conn = this.blogsService.addBlog(blog)
     //     .subscribe(data => {

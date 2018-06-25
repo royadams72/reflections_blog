@@ -1,16 +1,19 @@
+
+
  
 export const getSelectedBlog = (state : any) => {
-    let blogId = state.crudBlog.crudBlog.id;
+    console.log(state)
+    let blogId = state.crudBlog.crudBlog.blogUIState.id;
     let selectedBlog = state.blogs
-        // if (blogId == '') {
-        //     return selectedBlog = [];
-        // }
         .filter(blog => blog._id == blogId)
     return selectedBlog;
 
 }
 
 
-
+export const getBlogAction = (state : any) => {
+console.log(state)
+return state.crudBlog.crudBlog.blogUIState.uiState;
+}
 
 

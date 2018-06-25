@@ -2,7 +2,7 @@
     <h2>Click on a blog to edit or delete it</h2>
     <h4>Use form to add Blog</h4>
     <div class="row">
-      <app-blogform class='col-md-6' [selectedBlog]="selectedBlog$ | async" ></app-blogform>
+      <app-blogform class='col-md-6' [selectedBlog]="selectedBlog$ | async" [blogAction]="blogAction$ | async"></app-blogform>
       <app-crud-list class='col-md-6' [blogs]="blogs$ | async" (blogSelected)="onBlogSelected($event)"></app-crud-list>
     </div>
 <div>

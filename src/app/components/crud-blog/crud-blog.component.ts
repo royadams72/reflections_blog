@@ -4,9 +4,9 @@ import { AppState } from '../../store/app-state';
 import { getBlogs } from '../../store/selectors/blog.selectors';
 import { Blog } from '../../models/blog';
 import { Observable } from 'rxjs';
-import { getSelectedBlog } from './store/selectors/crud.selectors';
+import { getSelectedBlog, getBlogAction } from './store/selectors/crud.selectors';
 import { BLOG_SELECTED_ACTION } from './store/actions/crud.actions';
-import { CrudBlogState } from './store/reducers/crud-blog.reducer';
+import { BlogUIState } from './store/reducers/crud-blog.reducer';
 
 
 @Component({
@@ -16,18 +16,20 @@ import { CrudBlogState } from './store/reducers/crud-blog.reducer';
 })
 export class CrudBlogComponent implements OnInit {
   blogs$: Observable<Array<Blog>>;
-  selectedBlog$:Observable<any>
+  selectedBlog$:Observable<Blog>;
+  blogAction$:Observable<string>;
   constructor(private store:Store<AppState>) {
     this.blogs$ = store.select(getBlogs);
     this.selectedBlog$ = store.select(getSelectedBlog);
+    this.blogAction$ = store.select(getBlogAction)
   }
 
   ngOnInit() {
 
   }
-onBlogSelected(eventPayload:CrudBlogState){
+onBlogSelected(eventPayload:BlogUIState){
   this.store.dispatch({type:BLOG_SELECTED_ACTION, payload:eventPayload})
 
-  console.log(eventPayload)
+  // console.log(eventPayload)
 }
 }
