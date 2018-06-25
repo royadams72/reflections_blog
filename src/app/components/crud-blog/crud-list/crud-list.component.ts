@@ -4,7 +4,7 @@ import { Blog } from '../../../models/blog';
 import 'rxjs/add/operator/mergeMap';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app-state';
-import { GET_BLOG_FOR_FORM } from '../store/actions/crud.actions';
+import { BLOG_SELECTED_ACTION } from '../store/actions/crud.actions';
 import { getBlogs } from '../../../store/selectors/blog.selectors';
 
 @Component({
@@ -28,9 +28,9 @@ export class CrudListComponent implements OnInit {
   ngOnInit() {
     // this.blogs = this.blogsService.getBlogs();
   }
-  populateForm(id: String) {
+  populateForm(id: String, index:number) {
     
-    this.store.dispatch({type:GET_BLOG_FOR_FORM, payload:{id:id}})
+    this.store.dispatch({type:BLOG_SELECTED_ACTION, payload:{id:id, index:index}})
     
     // let blogs = this.blogsService.returnBlogs();
     // blogs.map((blog: Blog) => {
