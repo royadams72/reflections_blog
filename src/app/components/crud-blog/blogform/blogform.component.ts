@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs/Subscription';
@@ -7,7 +7,7 @@ import { BlogsService } from '../../../services/blogs.service';
 import { ErrorService } from '../../errors/error.service';
 import { Blog } from '../../../models/blog';
 import { Store } from '@ngrx/store';
-import { crudBlogState } from '../store/reducers/crud-blog.reducer';
+import { CrudBlogState } from '../store/reducers/crud-blog.reducer';
 import { getSelectedBlog } from '../store/selectors/crud.selectors';
 import { Observable } from 'rxjs';
 
@@ -26,15 +26,13 @@ export class BlogFormComponent implements OnInit {
   public _id: String;
   private connArray: Array<Subscription> = [];
   private index: number;
-  selectedBlog$:Observable<any>
+  @Input() selectedBlog:any
   
   // crudTest$:Observable<crudBlogState>
   constructor(private blogsService: BlogsService,
-              private errorService: ErrorService,
-               private store:Store<any>
+              private errorService: ErrorService
               ) {
 
-    this.selectedBlog$ = store.select(getSelectedBlog);
     this.state = 'CREATING';
     this.formValid = false;
     this.success = false;

@@ -3,8 +3,8 @@ import { Action } from '@ngrx/store';
 import { Blog } from '../../../../models/blog';
 // TO BE IMPLEMENTED IF YOU DECIDE TO USE NG-RX
 
-export const BLOG_SELECTED_ACTION = 'GET_BLOG_FOR_FORM';
-// export const LOAD_BLOGS_ACTION = 'LOAD_BLOGS_ACTION';
+export const BLOG_SELECTED_ACTION = 'BLOG_SELECTED_ACTION';
+
 export const POPULATE_BLOG_FORM_ACTION = 'POPULATE_BLOG_FORM_ACTION';
 
 export const UPDATE_UI_ACTION = 'UPDATE_UI_ACTION';

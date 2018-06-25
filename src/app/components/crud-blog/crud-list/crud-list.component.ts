@@ -1,36 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy , OnChanges, Output, EventEmitter} from '@angular/core';
 import { BlogsService } from '../../../services/blogs.service';
 import { Blog } from '../../../models/blog';
-import 'rxjs/add/operator/mergeMap';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../store/app-state';
-import { BLOG_SELECTED_ACTION } from '../store/actions/crud.actions';
-import { getBlogs } from '../../../store/selectors/blog.selectors';
+import { CrudBlogState } from '../store/reducers/crud-blog.reducer';
+
+
 
 @Component({
   selector: 'app-crud-list',
   templateUrl: './crud-list.component.html',
-  styleUrls: ['./crud-list.component.css']
+  styleUrls: ['./crud-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class CrudListComponent implements OnInit {
-  blogs$: any;
+  @Input() blogs: Blog[];
+  @Output() blogSelected:EventEmitter<CrudBlogState> = new EventEmitter()
+  constructor(private blogsService: BlogsService) { 
 
-  constructor(private blogsService: BlogsService, private store:Store<AppState>) { 
-    this.blogs$ = store.select(getBlogs)
-    // store.select(getSelectedBlog)
-    // store.subscribe(state=>{
-    //   console.log(state.blogs)
-    //   state.blogs
-    // })
   }
-
+  
+ngOnChanges(){
+  console.log(this .blogs)
+}
   ngOnInit() {
     // this.blogs = this.blogsService.getBlogs();
   }
-  populateForm(id: String, index:number) {
+  populateForm(id: string, index:number) {
+    // console.log(this.blogSelected)
+    this.blogSelected.emit({id:id, index:index})
     
-    this.store.dispatch({type:BLOG_SELECTED_ACTION, payload:{id:id, index:index}})
+    // 
     
     // let blogs = this.blogsService.returnBlogs();
     // blogs.map((blog: Blog) => {
