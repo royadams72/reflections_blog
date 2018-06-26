@@ -23,6 +23,7 @@ export class BlogFormComponent implements OnInit {
   private index: number;
   @Input() selectedBlog:BlogUIState
   @Input() blogAction:string;
+  @Input() blogIndex:string;
   // crudTest$:Observable<crudBlogState>
   constructor() {
 
@@ -35,13 +36,13 @@ export class BlogFormComponent implements OnInit {
   }
   ngOnChanges(){
     console.log(this.blogAction)
-    console.log(this.crudBlogForm)
+    console.log(this.blogIndex)
     this.crudBlogForm.patchValue({
       'title':this.selectedBlog[0].title,
       'vidUrl': this.selectedBlog[0].vidUrl,
       'script': this.selectedBlog[0].script,
       '_id': this.selectedBlog[0]._id,
-      'index': this.selectedBlog[0].index
+      'index': this.blogIndex
     })
     
     console.log(this.crudBlogForm.get('title').value)

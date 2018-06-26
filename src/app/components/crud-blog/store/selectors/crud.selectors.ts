@@ -17,3 +17,7 @@ return state.crudBlog.crudBlog.blogUIState.uiState;
 }
 
 
+export const getBlogIndex = (state : any) => {
+    console.log(state)
+    return state.crudBlog.crudBlog.blogUIState.index;
+    }
