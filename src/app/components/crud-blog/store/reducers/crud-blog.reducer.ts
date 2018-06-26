@@ -47,6 +47,7 @@ function handleBlogSelectedAction(state, action) {
         index: action.payload.index,
         uiState: 'UPDATING'
     }
+    // console.log(newState)
     return newState
     // let newState = action.payload console.log(newState)
 

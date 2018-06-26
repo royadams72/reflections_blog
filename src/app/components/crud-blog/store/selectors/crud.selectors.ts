@@ -3,16 +3,18 @@
  
 export const getSelectedBlog = (state : any) => {
     console.log(state)
-    let blogId = state.crudBlog.crudBlog.blogUIState.id;
-    let selectedBlog = state.blogs
-        .filter(blog => blog._id == blogId)
+    const blogId = state.crudBlog.crudBlog.blogUIState.index;
+    const newState = Object.assign({}, state);
+    const selectedBlog = newState.blogs[blogId]
+    console.log(selectedBlog, blogId)
+        // .filter(blog => blog._id == blogId)
     return selectedBlog;
 
 }
 
 
 export const getBlogAction = (state : any) => {
-console.log(state)
+// console.log(state.crudBlog.crudBlog.blogUIState)
 return state.crudBlog.crudBlog.blogUIState.uiState;
 }
 

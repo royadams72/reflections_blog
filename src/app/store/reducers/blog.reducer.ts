@@ -2,9 +2,10 @@ import {Action} from "@ngrx/store";
 
 import { Blog } from "../../models/blog";
 import { LOAD_BLOGS_ACTION, UPDATE_BLOGS_ACTION, POPULATE_BLOGS_ACTION } from "../actions/blog.actions";
+import { initialState, AppState } from "../app-state";
 // import { AppState } from "../app.state";
 
-export function blogs(state:Blog[] = [], action:Action) : Blog[] {
+export function blogs(state = initialState.blogs, action:Action) {
     switch (action.type)  {
         case LOAD_BLOGS_ACTION:
         // console.log(state)
@@ -22,14 +23,14 @@ export function blogs(state:Blog[] = [], action:Action) : Blog[] {
 //     console.log(state, action.payload)
 //         return state;
 // }
-function  handleLoadBlogsAction(state, action):Blog[]{
+function  handleLoadBlogsAction(state, action){
     //Must always return the state
     // console.log(state, action.payload)
         return state;
 }
-function  handlePopulateBlogsAction(state, action):Blog[]{
-    // const newState = Object.assign({},state);
-    let newState:Blog[] = action.payload.slice(); 
+function  handlePopulateBlogsAction(state, action){
+    const newState = Object.assign({},action.payload);
+    // let newState:Blog[] = action.payload.slice(); 
     // console.log(state,newState)
     return newState;
 }

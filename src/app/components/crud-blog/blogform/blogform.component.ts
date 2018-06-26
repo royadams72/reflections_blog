@@ -21,7 +21,7 @@ export class BlogFormComponent implements OnInit {
   public _id: String;
   private connArray: Array<Subscription> = [];
   private index: number;
-  @Input() selectedBlog:BlogUIState
+  @Input() selectedBlog:Blog
   @Input() blogAction:string;
   @Input() blogIndex:string;
   // crudTest$:Observable<crudBlogState>
@@ -36,16 +36,17 @@ export class BlogFormComponent implements OnInit {
   }
   ngOnChanges(){
     console.log(this.blogAction)
-    console.log(this.blogIndex)
-    this.crudBlogForm.patchValue({
-      'title':this.selectedBlog[0].title,
-      'vidUrl': this.selectedBlog[0].vidUrl,
-      'script': this.selectedBlog[0].script,
-      '_id': this.selectedBlog[0]._id,
-      'index': this.blogIndex
-    })
+    console.log(this.selectedBlog)
+    if(this.selectedBlog){
+      this.crudBlogForm.patchValue({
+        'title':this.selectedBlog.title,
+        'vidUrl': this.selectedBlog.vidUrl,
+        'script': this.selectedBlog.script,
+        '_id': this.selectedBlog._id,
+        'index': this.blogIndex
+      })
+    }
     
-    console.log(this.crudBlogForm.get('title').value)
   }
   private initForm() {
     // let items = [];
@@ -60,7 +61,9 @@ export class BlogFormComponent implements OnInit {
  
   }
 
-
+  onValidate(control:string){
+    return !this.crudBlogForm.get(control).valid && this.crudBlogForm.get(control).touched
+  }
   onSubmitForm(action) {
     let form = this.crudBlogForm
     let title = form.get('title');
