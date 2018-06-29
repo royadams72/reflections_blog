@@ -1,5 +1,7 @@
-import {Action, Store} from "@ngrx/store";
-import { BLOG_SELECTED_ACTION } from "../actions/crud.actions";
+import {Action, Store, createFeatureSelector, createSelector, ActionReducerMap, State} from "@ngrx/store";
+import { BLOG_SELECTED_ACTION, BLOG_UPDATED_ACTION, CRUD_SUCCESS_ACTION } from "../actions/crud.actions";
+import * as fromRoot from "../../../../store/app-state";
+
 
 export interface BlogUIState{
     id:string;
@@ -12,11 +14,10 @@ export const BLOG_UI_INITIAL_STATE:BlogUIState = {
     uiState:'CREATING'
 }
 
-export interface CrudBlogState {
+export interface CrudBlogState  {
     blogUIState:BlogUIState,
     crudState:any
 }
-
 
 
 export const CRUD_BLOG_INITIAL_STATE: CrudBlogState = {
@@ -24,31 +25,43 @@ export const CRUD_BLOG_INITIAL_STATE: CrudBlogState = {
     crudState:undefined
 }
 
-
-export function crudBlog(state:CrudBlogState = CRUD_BLOG_INITIAL_STATE, action:Action) {
-    switch (action.type)  {
-        
-        case BLOG_SELECTED_ACTION:
-
-        return  handleBlogSelectedAction(state, action); 
-    default:
-        return state;
-    }
-    
+export interface AppState extends fromRoot.AppState{
+    crudBlog:CrudBlogState
 }
 
-function handleBlogSelectedAction(state, action) {
-    // console.log(state.blogUIState)
+export const reducers = {
+    crudBlog
+  };
 
+export function crudBlog(state : CrudBlogState = CRUD_BLOG_INITIAL_STATE, action : Action) {
+    switch (action.type) {
+        case BLOG_SELECTED_ACTION:
+            return handleBlogSelectedAction(state, action);
+        case CRUD_SUCCESS_ACTION:
+            return handleCrudSucessAction(state, action)
+        default:
+            return state;
+    }
+
+}
+function handleBlogSelectedAction(state, action) {
     let newState = Object.assign({}, state);
-    // newState.blogUIState = action.payload
+
     newState.blogUIState = {
         id: action.payload.id,
         index: action.payload.index,
         uiState: 'UPDATING'
     }
-    // console.log(newState)
-    return newState
-    // let newState = action.payload console.log(newState)
+    return newState;
+}
 
+function handleCrudSucessAction(state, action) {
+    console.log(action);
+    let newState = Object.assign({}, state);
+    newState.blogUIState = {
+        id: '',
+        index: undefined,
+        uiState: action.type
+    }
+    return newState;
 }

@@ -1,36 +1,73 @@
 import {Action} from "@ngrx/store";
-
-import { Blog } from "../../models/blog";
-import { LOAD_BLOGS_ACTION, UPDATE_BLOGS_ACTION, POPULATE_BLOGS_ACTION } from "../actions/blog.actions";
-import { initialState, AppState } from "../app-state";
-// import { AppState } from "../app.state";
-
-export function blogs(state = initialState.blogs, action:Action) {
-    switch (action.type)  {
+import { LOAD_BLOGS_ACTION, BLOGS_LOADED_ACTION } from "../actions/blog.actions";
+import { initialState } from "../app-state";
+import { BLOG_UPDATED_ACTION, BLOG_DELETED_ACTION, BLOG_ADDED_ACTION, BLOG_ADDED_TO_DB_ACTION } from "../../components/crud-blog/store/actions/crud.actions";
+import * as _ from  "lodash";
+export function blogs(state = initialState.blogs, action : Action) {
+    switch (action.type) {
         case LOAD_BLOGS_ACTION:
-        // console.log(state)
-        return  handleLoadBlogsAction(state, action);
-        case POPULATE_BLOGS_ACTION:
-        // console.log(state, action)
-        return handlePopulateBlogsAction(state, action);
-    default:
-        return state;
+            // console.log(state)
+            return handleLoadBlogsAction(state, action);
+
+        case BLOGS_LOADED_ACTION:
+            return handleLoadedBlogsAction(state, action);
+
+        case BLOG_UPDATED_ACTION:
+            return handleBlogUpdatedAction(state, action);
+
+        case BLOG_DELETED_ACTION:
+            return handleBlogDeletedAction(state, action);
+
+            case BLOG_ADDED_ACTION:
+            return handleBlogAddedAction(state, action);
+
+            case BLOG_ADDED_TO_DB_ACTION:
+            console.log(state)
+            return handleBlogAddedToDBAction(state, action);
+        default:
+            return state;
     }
-    
+
 }
-// function  handleUpdateBlogsAction(state, action):Blog[]{
-//     //Must always return the state
-//     console.log(state, action.payload)
-//         return state;
-// }
-function  handleLoadBlogsAction(state, action){
+
+function handleLoadBlogsAction(state, action) {
     //Must always return the state
-    // console.log(state, action.payload)
-        return state;
+    return state;
 }
-function  handlePopulateBlogsAction(state, action){
-    const newState = Object.assign({},action.payload);
-    // let newState:Blog[] = action.payload.slice(); 
-    // console.log(state,newState)
+function handleLoadedBlogsAction(state, action) {
+    const newState = Object.assign({}, action.payload);
+    return newState;
+}
+
+function handleBlogUpdatedAction(state, action) {
+    // console.log(state)
+    const index = action.payload.index;
+    const newState = Object.assign({}, state);
+    newState[index] = action.payload.blog
+    // console.log(newState)
+    return newState;
+}
+
+function handleBlogDeletedAction(state, action) {
+    // console.log(state)
+    const index = action.payload.index;
+    const newState = Object.assign({}, state);
+    delete newState[index];
+    // console.log(newState)
+    return newState;
+}
+
+function handleBlogAddedAction(state, action) {
+    return state;
+}
+
+function handleBlogAddedToDBAction(state, action) {
+    let n = _.values(state);
+    let index:number = n.length;
+    let newState = {
+        ...state
+    }
+    newState[index] = action.payload
+    console.log(state, action.payload);
     return newState;
 }

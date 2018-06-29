@@ -1,10 +1,5 @@
-          <div class="col-md-12">
-
-
-            <!-- value="{{selectedBlog[0]?.title}}" -->
-            <div class="alert alert-success" *ngIf="success">
-              {{successMsg}}
-              </div>
+          <div class="col-md-12">       
+             <alert  *ngIf="successMsg" type="success" [dismissible]="true" (onClose)="onAlertClosed($event)"> {{successMsg}}</alert>
               <form name="crudBlogForm" id="crudBlogForm" novalidate [formGroup]='crudBlogForm'>
                 <div class="form-group  floating-label-form-group controls">
                             <label for="name">Title</label>
@@ -28,17 +23,16 @@
                         <input formControlName="index" type="hidden"  id="index">
 
                     <br>
-                    <div id="success"></div>
                         <div *ngIf="blogAction === 'CREATING'" class="text-center">
-                            <button type="button" class="btn btn-lg btn-success" (click)="onSubmitForm('CREATING')" [disabled]="!crudBlogForm.valid">Add Entry</button>
+                            <button type="button" class="btn btn-lg btn-success" (click)="onSubmitForm('BLOG_ADDED_ACTION')" [disabled]="!crudBlogForm.valid">Add Entry</button>
                         </div>
                         <div class="container">
                           <div *ngIf="blogAction === 'UPDATING' " class="row text-center">
                           <div class="col-md-6">
-                              <button type="button" class="btn btn-lg btn-primary mgb-5" (click)="onSubmitForm('UPDATING')" [disabled]="!crudBlogForm.valid">Update Entry</button>
+                              <button type="button" class="btn btn-lg btn-primary mgb-5" (click)="onSubmitForm('BLOG_UPDATED_ACTION')" [disabled]="!crudBlogForm.valid">Update Entry</button>
                           </div>
                           <div class="col-md-6">
-                              <button type="button" class="btn btn-lg btn-danger" (click)="onSubmitForm('DELETING')" [disabled]="!crudBlogForm.valid">Delete Entry</button>
+                              <button type="button" class="btn btn-lg btn-danger" (click)="onSubmitForm('BLOG_DELETED_ACTION')" [disabled]="!crudBlogForm.valid">Delete Entry</button>
                           </div>
                         </div>
                         </div>

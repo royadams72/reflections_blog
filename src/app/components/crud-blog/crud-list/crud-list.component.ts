@@ -24,7 +24,7 @@ ngOnChanges(){
     // this.blogs = this.blogsService.getBlogs();
   }
   populateForm(id: string, index:number) {
-    // console.log(this.blogSelected)
+    // console.log({id:id, index:index})
     this.blogSelected.emit({id:id, index:index})
     
     // 

@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Blog } from '../../../models/blog';
-import { BlogUIState } from '../store/reducers/crud-blog.reducer';
+
 
 
 
@@ -16,7 +16,7 @@ export class BlogFormComponent implements OnInit {
   public state: string;
   public crudBlogForm: FormGroup;
   private formValid: boolean;
-  public success: boolean;
+  // public success: boolean;
   private successMsg: String;
   public _id: String;
   private connArray: Array<Subscription> = [];
@@ -24,19 +24,26 @@ export class BlogFormComponent implements OnInit {
   @Input() selectedBlog:Blog
   @Input() blogAction:string;
   @Input() blogIndex:string;
+  @Output() onCrudAction:EventEmitter<{}> = new EventEmitter()
   // crudTest$:Observable<crudBlogState>
   constructor() {
 
     // this.state = 'CREATING';
     this.formValid = false;
-    this.success = false;
+    // this.success = false;
   }
   ngOnInit() {
     this.initForm();
   }
   ngOnChanges(){
-    console.log(this.blogAction)
-    console.log(this.selectedBlog)
+    // console.log(this.blogAction)
+    // console.log(this.selectedBlog)
+
+    if (this.blogAction == "CRUD_SUCCESS_ACTION"){
+      this.crudBlogForm.reset();
+      this.successMsg = "The operation has been successful"
+      this.blogAction = "CREATING";
+    }
     if(this.selectedBlog){
       this.crudBlogForm.patchValue({
         'title':this.selectedBlog.title,
@@ -60,7 +67,9 @@ export class BlogFormComponent implements OnInit {
     });
  
   }
-
+  onAlertClosed(event){
+    this.successMsg = undefined;
+  }
   onValidate(control:string){
     return !this.crudBlogForm.get(control).valid && this.crudBlogForm.get(control).touched
   }
@@ -73,7 +82,8 @@ export class BlogFormComponent implements OnInit {
     let index = form.get('index');
     let conn: Subscription;
     // action === 'CREATING' ? vidID = null : vidID = this._id;
-    let blog: Blog = { _id: _id.value, title: title.value, vidUrl: vidUrl.value, script: script.value }
+    let blog:Blog = { _id: _id.value, title: title.value, vidUrl: vidUrl.value, script: script.value }
+    this.onCrudAction.emit({ action:action,payload:{blog:blog, index:index.value}})
     console.log(blog)
     // if (action === 'CREATING') {
     //   conn = this.blogsService.addBlog(blog)

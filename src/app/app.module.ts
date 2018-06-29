@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { routing } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +10,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { BlogpageComponent } from './components/blogpage/blogpage.component';
 import { ErrorComponent } from './components/errors/error.component';
 import { LoginComponent } from './components/login/login.component';
-import { AlertComponent } from './components/alert/alert.component';
+// import { AlertComponent } from './components/alert/alert.component';
 /*Services*/
 import { ErrorService } from './components//errors/error.service';
 import { TokenInterceptor } from './services/token.interceptor';
@@ -18,15 +18,16 @@ import { BlogsService } from './services/blogs.service';
 import { AuthService } from './services/auth.service';
 import { IsloggedinGuard } from './routing/isloggedin.guard';
 import { AlertService } from './components/alert/alert.service';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BlogEffects } from './store/effects/blog.effects';
 import {blogs} from './store/reducers/blog.reducer'
 import { CrudModule } from './components/crud-blog/crud.module';
 import { initialState } from './store/app-state';
-// material
-// import {MatTableDataSource, MatSort} from '@angular/material';
+import { AlertModule } from 'ngx-bootstrap';
+
+
 
 export const reducers = {
   blogs
@@ -40,7 +41,7 @@ export const reducers = {
     BlogpageComponent,
     LoginComponent,
     ErrorComponent,
-    AlertComponent
+    // AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -53,8 +54,8 @@ export const reducers = {
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([
       BlogEffects
-    
     ])
+  
   ],
   providers: [
     BlogsService,
@@ -68,6 +69,7 @@ export const reducers = {
       multi: true
     }
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

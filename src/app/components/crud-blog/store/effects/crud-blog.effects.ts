@@ -9,19 +9,42 @@ import { BlogsService } from '../../../../services/blogs.service';
 
 import { AppState } from '../../../../store/app-state';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { BLOG_UPDATED_ACTION, BlogUpdatedAction, CrudSucessAction, BLOG_DELETED_ACTION, BlogDeletedAction, BlogAddedAction, BLOG_ADDED_ACTION, BlogAddedToDBAction } from '../actions/crud.actions';
+
 
 
 
 @Injectable()
 export class CrudBlogEffects {
-  constructor(private actions$: Actions, private blogService: BlogsService, private store:Store<AppState>) {}
+  constructor(private actions$: Actions, private blogService: BlogsService, private store$:Store<AppState>) {}
 
-//   @Effect() blogs$: Observable<any> = this.actions$
-//       .ofType<GetBlogForFormAction>(GET_BLOG_FOR_FORM)
-//     .map(action =>  {
-//         console.log(action.type)
-//         return new PopulateBlogFormAction(action.payload)
-//     });
+  @Effect() updateBlog$: Observable<any> = this.actions$
+      .ofType<BlogUpdatedAction>(BLOG_UPDATED_ACTION)
+        .switchMap(action =>  {
+            console.log(action)
+        return this.blogService.updateBlog(action.payload.blog,action.payload.index)
+        })
+        .map((action)=>new CrudSucessAction(action))
+
+
+    @Effect() deleteBlog$: Observable<any> = this.actions$
+    .ofType<BlogDeletedAction>(BLOG_DELETED_ACTION)
+        .switchMap(action =>  {
+            console.log(action)
+            return this.blogService.deleteBlog(action.payload.blog,action.payload.index)
+        })
+        .map((action)=>new CrudSucessAction(action))
+
+
+  @Effect() addBlog$: Observable<any> = this.actions$
+  .ofType<BlogAddedAction>(BLOG_ADDED_ACTION)
+    .mergeMap(action =>  {
+        console.log(action)
+    return this.blogService.addBlog(action.payload.blog)
+    .mergeMap((action)=>[new BlogAddedToDBAction(action), new CrudSucessAction(action)])
+    })
+    
    
-    // new UserThreadsLoadedAction(allUserData)
 }
