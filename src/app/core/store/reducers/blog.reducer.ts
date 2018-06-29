@@ -1,10 +1,21 @@
 import {Action} from "@ngrx/store";
 import { LOAD_BLOGS_ACTION, BLOGS_LOADED_ACTION } from "../actions/blog.actions";
-import { initialState, AppState } from "../app-state";
-import { BLOG_UPDATED_ACTION, BLOG_DELETED_ACTION, BLOG_ADDED_ACTION, BLOG_ADDED_TO_DB_ACTION } from "../../components/crud-blog/store/actions/crud.actions";
+import { BLOG_UPDATED_ACTION, BLOG_DELETED_ACTION, BLOG_ADDED_ACTION, BLOG_ADDED_TO_DB_ACTION } from "../../../components/crud-blog/store/actions/crud.actions";
 import * as _ from  "lodash";
+import { Blog } from "../../../models/blog";
 
-export function blogs(state = initialState.blogs, action : Action) {
+export interface State {
+    readonly loaded: boolean;
+    readonly blogs: {[key:number]:Blog}
+  }
+  
+  const initialState: State = {
+    loaded:false,
+    blogs: {}
+  };
+  
+
+export function blogs(state:State = initialState, action : Action):State {
     switch (action.type) {
         case LOAD_BLOGS_ACTION:
             // console.log(state)
@@ -73,4 +84,4 @@ function handleBlogAddedToDBAction(state, action) {
     return newState;
 }
 
-export const getBlogs = (state: AppState) => state.blogs;
+export const getBlogs = (state: State) => state.blogs;

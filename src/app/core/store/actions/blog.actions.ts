@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Blog } from '../../models/blog';
+import { Blog } from '../../../models/blog';
 // TO BE IMPLEMENTED IF YOU DECIDE TO USE NG-RX
 
 // export const UPDATE_BLOGS_ACTION = 'UPDATE_BLOGS_ACTION';

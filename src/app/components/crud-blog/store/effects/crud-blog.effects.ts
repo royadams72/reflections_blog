@@ -7,7 +7,7 @@ import 'rxjs/add/operator/withLatestFrom';
 
 import { BlogsService } from '../../../../services/blogs.service';
 
-import { AppState } from '../../../../store/app-state';
+import { AppState } from '../../../../core/store/app-state';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 

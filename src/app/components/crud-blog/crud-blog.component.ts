@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../store/app-state';
-import { getBlogs } from '../../store/selectors/blog.selectors';
+import { AppState } from '../../core/store/app-state';
+import { getBlogs } from '../../core/store/selectors/blog.selectors';
 import { Blog } from '../../models/blog';
 import { Observable } from 'rxjs';
 import { getSelectedBlog, getBlogAction, getBlogIndex } from './store/selectors/crud.selectors';

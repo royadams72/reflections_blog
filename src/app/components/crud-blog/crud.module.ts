@@ -12,10 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CrudBlogEffects } from './store/effects/crud-blog.effects';
 
-// export const reducers = {
-//   crudBlog,
-//   blogs
-//   };
+
 export const reducers = {
   crudBlog:crudBlog
 };

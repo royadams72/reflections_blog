@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy , OnChanges, Output, EventEmitter} from '@angular/core';
 import { BlogsService } from '../../../services/blogs.service';
 import { Blog } from '../../../models/blog';
-import { BlogUIState } from '../store/crud.state';
+import { BlogUIState } from '../store/reducers/crud-blog.reducer';
 
 
 
@@ -25,7 +25,7 @@ ngOnChanges(){
   }
   populateForm(id: string, index:number) {
     // console.log({id:id, index:index})
-    this.blogSelected.emit({id:id, index:index})
+    this.blogSelected.emit({id:id, index:index, uiState:''})
     
     // 
     

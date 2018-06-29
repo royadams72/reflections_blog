@@ -21,10 +21,10 @@ import { AlertService } from './components/alert/alert.service';
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { BlogEffects } from './store/effects/blog.effects';
-import {blogs} from './store/reducers/blog.reducer'
+import { BlogEffects } from './core/store/effects/blog.effects';
+import {blogs} from './core/store/reducers/blog.reducer'
 import { CrudModule } from './components/crud-blog/crud.module';
-import { initialState } from './store/app-state';
+import { initialState } from './core/store/app-state';
 import { AlertModule } from 'ngx-bootstrap';
 
 
@@ -50,7 +50,7 @@ export const reducers = {
     ReactiveFormsModule,
     routing,
     CrudModule,
-    StoreModule.forRoot(reducers, {initialState: initialState}),
+    StoreModule.forRoot(reducers, {initialState: undefined}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([
       BlogEffects

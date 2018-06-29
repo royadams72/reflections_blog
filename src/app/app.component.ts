@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavComponent } from './components/nav/nav.component';
 import { AuthService } from './services/auth.service';
 import { Store } from '@ngrx/store';
-import { AppState } from './store/app-state';
-import { LOAD_BLOGS_ACTION } from './store/actions/blog.actions';
+import { AppState } from './core/store/app-state';
+import { LOAD_BLOGS_ACTION } from './core/store/actions/blog.actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

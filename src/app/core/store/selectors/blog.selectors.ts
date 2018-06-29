@@ -1,6 +1,6 @@
 import { AppState } from "../app-state";
 import * as _ from  "lodash";
-import { Blog } from "../../models/blog";
+import { Blog } from "../../../models/blog";
 import { createSelector } from "@ngrx/store";
 
 

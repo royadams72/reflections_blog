@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {Actions, Effect} from "@ngrx/effects";
 import 'rxjs/add/operator/switchMap';
 import {Observable} from "rxjs/Observable";
-import { BlogsService } from '../../services/blogs.service';
+import { BlogsService } from '../../../services/blogs.service';
 import { LoadBlogsAction, LOAD_BLOGS_ACTION, BlogsLoadedAction } from '../actions/blog.actions';
 
 
