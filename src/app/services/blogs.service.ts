@@ -13,38 +13,31 @@ export class BlogsService {
   private blogsURL: string;
   public populateList;
   public populateForm;
-  public blogs: Blog[];
   private headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) {
     this.blogsURL = ENV.BASE_API;
-    // this.populateList = new Subject<Blog[]>();
-    // this.populateForm = new Subject<Blog>();
   }
 
-  returnBlogs() {
-    return this.blogs;
-  }
 
-  getBlogs() {
-    return this.http.get(this.blogsURL + 'blogs')
-      .map((res: Response) => {
-        console.log(res)
-        this.blogs = res['blogs'];
-        return this.blogs;
+  getBlogs(): Observable<Blog[]> {
+    return this.http.get<Blog[]>(this.blogsURL + 'blogs')
+      .map((res: Blog[]) => {
+        console.log(res['blogs'])
+        return res['blogs'];
       })
   }
 
-  getBlog(id) {
-    return this.http.get(this.blogsURL + 'blogs/' + id)
-      .map((res: Response) => {
+  getBlog(id): Observable<Blog>  {
+    return this.http.get<Blog>(this.blogsURL + 'blogs/' + id)
+      .map((res: Blog) => {
         console.log(res)
         return res["blog"];
       })
   }
 
-  updateBlog(blog: Blog, index: number) {
-    return this.http.patch(this.blogsURL + 'blogs/edit', blog)
-      .map((res: Response) => {
+  updateBlog(blog: Blog, index: number): Observable<Blog> {
+    return this.http.patch<Blog>(this.blogsURL + 'blogs/edit', blog)
+      .map((res:Blog) => {
         if (res) {
           console.log(res)
           // this.blogs.splice(index, 1, blog);

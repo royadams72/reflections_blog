@@ -1,39 +1,11 @@
 import {Action, Store, createFeatureSelector, createSelector, ActionReducerMap, State} from "@ngrx/store";
 import { BLOG_SELECTED_ACTION, BLOG_UPDATED_ACTION, CRUD_SUCCESS_ACTION } from "../actions/crud.actions";
-import * as fromRoot from "../../../../store/app-state";
+import * as fromCrudState from "../crud.state"
 
 
-export interface BlogUIState{
-    id:string;
-    index:number
-    uiState:string
-}
-export const BLOG_UI_INITIAL_STATE:BlogUIState = {
-    id:'',
-    index:undefined,
-    uiState:'CREATING'
-}
-
-export interface CrudBlogState  {
-    blogUIState:BlogUIState,
-    crudState:any
-}
 
 
-export const CRUD_BLOG_INITIAL_STATE: CrudBlogState = {
-    blogUIState:BLOG_UI_INITIAL_STATE,
-    crudState:undefined
-}
-
-export interface AppState extends fromRoot.AppState{
-    crudBlog:CrudBlogState
-}
-
-export const reducers = {
-    crudBlog
-  };
-
-export function crudBlog(state : CrudBlogState = CRUD_BLOG_INITIAL_STATE, action : Action) {
+export function crudBlog(state : fromCrudState.CrudBlogState = fromCrudState.CRUD_BLOG_INITIAL_STATE, action : Action) {
     switch (action.type) {
         case BLOG_SELECTED_ACTION:
             return handleBlogSelectedAction(state, action);

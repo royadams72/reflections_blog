@@ -1,8 +1,9 @@
 import {Action} from "@ngrx/store";
 import { LOAD_BLOGS_ACTION, BLOGS_LOADED_ACTION } from "../actions/blog.actions";
-import { initialState } from "../app-state";
+import { initialState, AppState } from "../app-state";
 import { BLOG_UPDATED_ACTION, BLOG_DELETED_ACTION, BLOG_ADDED_ACTION, BLOG_ADDED_TO_DB_ACTION } from "../../components/crud-blog/store/actions/crud.actions";
 import * as _ from  "lodash";
+
 export function blogs(state = initialState.blogs, action : Action) {
     switch (action.type) {
         case LOAD_BLOGS_ACTION:
@@ -71,3 +72,5 @@ function handleBlogAddedToDBAction(state, action) {
     console.log(state, action.payload);
     return newState;
 }
+
+export const getBlogs = (state: AppState) => state.blogs;

@@ -8,6 +8,6 @@ export const getAppState = (state: AppState) => state;
 
 export const getBlogs = createSelector(getAppState, (state) => {
     const loadedBlogs = _.values<Blog>(state.blogs);
-    console.log(state.blogs);
+    console.log(state);
     return loadedBlogs;
 })

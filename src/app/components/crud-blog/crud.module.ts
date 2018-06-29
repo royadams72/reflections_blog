@@ -6,7 +6,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { CrudBlogComponent } from './crud-blog.component';
 import { BlogFormComponent } from './blogform/blogform.component';
 import { CrudListComponent } from './crud-list/crud-list.component';
-import { reducers } from './store/reducers/crud-blog.reducer';
+import { crudBlog } from "./store/reducers/crud-blog.reducer"
 import { AlertModule, AccordionModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -16,7 +16,9 @@ import { CrudBlogEffects } from './store/effects/crud-blog.effects';
 //   crudBlog,
 //   blogs
 //   };
-
+export const reducers = {
+  crudBlog:crudBlog
+};
 const appRoutes: Routes = [
   { path: "crudblog", component: CrudBlogComponent }
 ]
