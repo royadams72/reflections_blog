@@ -83,7 +83,7 @@ export class BlogFormComponent implements OnInit {
     let conn: Subscription;
     // action === 'CREATING' ? vidID = null : vidID = this._id;
     let blog:Blog = { _id: _id.value, title: title.value, vidUrl: vidUrl.value, script: script.value }
-    this.onCrudAction.emit({ action:action,payload:{blog:blog, index:index.value}})
+    this.onCrudAction.emit({ action:action, payload:{blog:blog, index:index.value}})
     console.log(blog)
     // if (action === 'CREATING') {
     //   conn = this.blogsService.addBlog(blog)

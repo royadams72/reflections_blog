@@ -24,14 +24,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { BlogEffects } from './core/store/effects/blog.effects';
 import {blogs} from './core/store/reducers/blog.reducer'
 import { CrudModule } from './components/crud-blog/crud.module';
-import { initialState } from './core/store/app-state';
+import { reducers } from './reducers/';
 import { AlertModule } from 'ngx-bootstrap';
 
 
 
-export const reducers = {
-  blogs
-  };
+// export const reducers = {
+//   blogs
+//   };
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ export const reducers = {
     ReactiveFormsModule,
     routing,
     CrudModule,
-    StoreModule.forRoot(reducers, {initialState: undefined}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([
       BlogEffects

@@ -6,3 +6,7 @@ export interface Blog {
   script: String
 }
 
+export interface BlogsObjs{
+  blogs:{}
+}
+

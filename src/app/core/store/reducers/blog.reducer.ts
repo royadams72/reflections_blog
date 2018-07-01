@@ -9,7 +9,7 @@ export interface State {
     readonly blogs: {[key:number]:Blog}
   }
   
-  const initialState: State = {
+  export const initialState: State = {
     loaded:false,
     blogs: {}
   };
@@ -22,7 +22,7 @@ export function blogs(state:State = initialState, action : Action):State {
             return handleLoadBlogsAction(state, action);
 
         case BLOGS_LOADED_ACTION:
-            return handleLoadedBlogsAction(state, action);
+            return handleBlogsLoadedAction(state, action);
 
         case BLOG_UPDATED_ACTION:
             return handleBlogUpdatedAction(state, action);
@@ -46,8 +46,19 @@ function handleLoadBlogsAction(state, action) {
     //Must always return the state
     return state;
 }
-function handleLoadedBlogsAction(state, action) {
-    const newState = Object.assign({}, action.payload);
+function handleBlogsLoadedAction(state, action) {
+
+    _.zipObject(action.payload, _.map(action.payload, function(res) {
+        console.log(res)
+     }));
+    
+    // console.log(output);
+    console.log(state, action.payload)
+    let newState = Object.assign({}, state);
+     newState = {
+        loaded:true,
+        blog:action.payload
+    }
     return newState;
 }
 

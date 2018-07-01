@@ -5,7 +5,7 @@ import { Blog } from '../../../models/blog';
 
 // export const UPDATE_BLOGS_ACTION = 'UPDATE_BLOGS_ACTION';
 export const LOAD_BLOGS_ACTION = 'LOAD_BLOGS_ACTION';
-export const BLOGS_LOADED_ACTION = 'POPULATE_BLOGS_ACTION';
+export const BLOGS_LOADED_ACTION = 'BLOGS_LOADED_ACTION';
 
 
 export class LoadBlogsAction implements Action {
@@ -25,8 +25,5 @@ export class BlogsLoadedAction implements Action {
        
     }
 }
-// export class UpdatedBlogsAction implements Action {
-//     readonly type = UPDATE_BLOGS_ACTION;
-//     constructor(public payload:number) {      
-//     }
-// }
+
+export type Actions = LoadBlogsAction | BlogsLoadedAction

@@ -18,7 +18,7 @@ export class CrudListComponent implements OnInit {
   constructor() {}
   
 ngOnChanges(){
-  // console.log(this .blogs)
+  console.log(this.blogs)
 }
   ngOnInit() {
     // this.blogs = this.blogsService.getBlogs();
