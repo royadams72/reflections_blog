@@ -15,7 +15,7 @@ export interface State {
   };
   
 
-export function blogs(state:State = initialState, action : Action):State {
+export function reducer(state:State = initialState, action : Action):State {
     switch (action.type) {
         case LOAD_BLOGS_ACTION:
             // console.log(state)
@@ -36,6 +36,7 @@ export function blogs(state:State = initialState, action : Action):State {
             case BLOG_ADDED_TO_DB_ACTION:
             console.log(state)
             return handleBlogAddedToDBAction(state, action);
+
         default:
             return state;
     }
@@ -47,27 +48,29 @@ function handleLoadBlogsAction(state, action) {
     return state;
 }
 function handleBlogsLoadedAction(state, action) {
-
-    _.zipObject(action.payload, _.map(action.payload, function(res) {
-        console.log(res)
-     }));
     
     // console.log(output);
     console.log(state, action.payload)
+    let blog = Object.assign({},  action.payload);
     let newState = Object.assign({}, state);
      newState = {
         loaded:true,
-        blog:action.payload
+        blogs:blog
     }
     return newState;
 }
 
 function handleBlogUpdatedAction(state, action) {
-    // console.log(state)
+    console.log(state.blogs)
     const index = action.payload.index;
-    const newState = Object.assign({}, state);
-    newState[index] = action.payload.blog
-    // console.log(newState)
+    let newState = Object.assign({}, state);
+    const blogs = Object.assign({}, state.blogs);
+    blogs[index] = action.payload.blog
+    newState = {
+        loaded:newState.loaded,
+        blogs: blogs
+    }
+    console.log(blogs[index])
     return newState;
 }
 
@@ -75,7 +78,7 @@ function handleBlogDeletedAction(state, action) {
     // console.log(state)
     const index = action.payload.index;
     const newState = Object.assign({}, state);
-    delete newState[index];
+    delete newState.blogs[index];
     // console.log(newState)
     return newState;
 }
@@ -85,13 +88,13 @@ function handleBlogAddedAction(state, action) {
 }
 
 function handleBlogAddedToDBAction(state, action) {
-    let n = _.values(state);
+    let n = _.values(state.blogs);
     let index:number = n.length;
     let newState = {
         ...state
     }
-    newState[index] = action.payload
-    console.log(state, action.payload);
+    newState.blogs[index] = action.payload
+    console.log(n);
     return newState;
 }
 

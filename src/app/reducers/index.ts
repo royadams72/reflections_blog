@@ -4,14 +4,13 @@ import { ActionReducerMap, createSelector } from '@ngrx/store';
 import { ActionReducer } from 'ngx-bootstrap/mini-ngrx';
 //Interface to hold all states, top level state interface is just a map of keys to inner state types.
 export interface Root {
-  readonly blogs: fromBlogs.State;
+  readonly blogState: fromBlogs.State;
 }
 export type RootActions = blogActions.Actions;
 
 //Get reducers
-//TODO: rename all reducer functions to reducer
 export const initialState = {
-   blogs: fromBlogs.blogs(undefined, {} as blogActions.Actions)
+  blogState: fromBlogs.reducer(undefined, {} as blogActions.Actions)
 }
 
 export interface State {
@@ -20,7 +19,7 @@ export interface State {
 //Make sure below is not a function expression
   export function rootReducer(state: Root = initialState, action: RootActions){
     return {
-        blogs: fromBlogs.blogs(state.blogs, action as blogActions.Actions)
+        blogState: fromBlogs.reducer(state.blogState, action as blogActions.Actions)
     };
   };
 
@@ -39,11 +38,8 @@ export interface State {
 
   export const getRoot = (state: State) => state.root;
 
-/**
- * Layout Reducers
- */
 
 export const getBlogsState = createSelector(
   getRoot,
-  (state: Root) => state.blogs
+  (state: Root) => state.blogState
 );

@@ -18,14 +18,14 @@ import { BlogsService } from './services/blogs.service';
 import { AuthService } from './services/auth.service';
 import { IsloggedinGuard } from './routing/isloggedin.guard';
 import { AlertService } from './components/alert/alert.service';
-import { StoreModule, ActionReducerMap } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BlogEffects } from './core/store/effects/blog.effects';
-import {blogs} from './core/store/reducers/blog.reducer'
+
 import { CrudModule } from './components/crud-blog/crud.module';
 import { reducers } from './reducers/';
-import { AlertModule } from 'ngx-bootstrap';
+
 
 
 

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/withLatestFrom';
 
 import { BlogsService } from '../../../../services/blogs.service';
 
-import { AppState } from '../../../../core/store/app-state';
+import * as fromRoot from '../../../../reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -18,11 +18,11 @@ import { BLOG_UPDATED_ACTION, BlogUpdatedAction, CrudSucessAction, BLOG_DELETED_
 
 @Injectable()
 export class CrudBlogEffects {
-  constructor(private actions$: Actions, private blogService: BlogsService, private store$:Store<AppState>) {}
+  constructor(private actions$: Actions, private blogService: BlogsService, private store$:Store<fromRoot.State>) {}
 
   @Effect() updateBlog$: Observable<any> = this.actions$
       .ofType<BlogUpdatedAction>(BLOG_UPDATED_ACTION)
-        .switchMap(action =>  {
+        .mergeMap(action =>  {
             console.log(action)
         return this.blogService.updateBlog(action.payload.blog,action.payload.index)
         })

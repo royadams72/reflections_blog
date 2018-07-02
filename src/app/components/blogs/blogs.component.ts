@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { BlogsService } from '../../services/blogs.service';
-import { Blog } from '../../models/blog';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../core/store/app-state';
 import { Observable } from 'rxjs';
 import { getBlogs } from '../../core/store/selectors/blog.selectors';
+import * as fromRoot from '../crud-blog/store/reducers';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
@@ -13,9 +12,8 @@ import { getBlogs } from '../../core/store/selectors/blog.selectors';
 })
 export class BlogsComponent implements OnInit {
   blogs$:Observable<any>;
-  constructor(private  blogsService: BlogsService, private store: Store<AppState>) {
-    this.blogs$ = this.store.select(getBlogs)
-  
+  constructor(private  blogsService: BlogsService, private store: Store<fromRoot.State>) {
+    this.blogs$ = this.store.select(getBlogs);
    }
  
   ngOnInit() {

@@ -1,35 +1,20 @@
-import {Action, Store, createFeatureSelector, createSelector, ActionReducerMap, State} from "@ngrx/store";
-import { BLOG_SELECTED_ACTION, BLOG_UPDATED_ACTION, CRUD_SUCCESS_ACTION } from "../actions/crud.actions";
+import {Action} from "@ngrx/store";
+import { BLOG_SELECTED_ACTION, CRUD_SUCCESS_ACTION } from "../actions/crud.actions";
 
 
-export interface BlogUIState{
+export interface State{
     id:string;
     index:number
     uiState:string
 }
-export const BLOG_UI_INITIAL_STATE:BlogUIState = {
+export const initialState:State = {
     id:'',
     index:undefined,
     uiState:'CREATING'
 }
 
-export interface CrudBlogState  {
-    blogUIState:BlogUIState,
-    crudState:any
-}
 
-
-export const CRUD_BLOG_INITIAL_STATE: CrudBlogState = {
-    blogUIState:BLOG_UI_INITIAL_STATE,
-    crudState:undefined
-}
-
-// export interface AppState extends fromRoot.AppState{
-//     crudBlog:CrudBlogState
-// }
-
-
-export function crudBlog(state :CrudBlogState = CRUD_BLOG_INITIAL_STATE, action : Action) {
+export function reducer(state :State = initialState, action : Action) {
     switch (action.type) {
         case BLOG_SELECTED_ACTION:
             return handleBlogSelectedAction(state, action);
@@ -43,21 +28,24 @@ export function crudBlog(state :CrudBlogState = CRUD_BLOG_INITIAL_STATE, action 
 function handleBlogSelectedAction(state, action) {
     let newState = Object.assign({}, state);
 
-    newState.blogUIState = {
+    newState = {
         id: action.payload.id,
         index: action.payload.index,
         uiState: 'UPDATING'
     }
+    console.log(newState)
     return newState;
 }
 
 function handleCrudSucessAction(state, action) {
     console.log(action);
     let newState = Object.assign({}, state);
-    newState.blogUIState = {
+    newState = {
         id: '',
         index: undefined,
         uiState: action.type
     }
     return newState;
 }
+
+export const getBlogUIState = (state: State) => state;

@@ -37,7 +37,7 @@ export class BlogFormComponent implements OnInit {
   }
   ngOnChanges(){
     // console.log(this.blogAction)
-    // console.log(this.selectedBlog)
+    console.log(this.selectedBlog)
 
     if (this.blogAction == "CRUD_SUCCESS_ACTION"){
       this.crudBlogForm.reset();
@@ -84,46 +84,7 @@ export class BlogFormComponent implements OnInit {
     // action === 'CREATING' ? vidID = null : vidID = this._id;
     let blog:Blog = { _id: _id.value, title: title.value, vidUrl: vidUrl.value, script: script.value }
     this.onCrudAction.emit({ action:action, payload:{blog:blog, index:index.value}})
-    console.log(blog)
-    // if (action === 'CREATING') {
-    //   conn = this.blogsService.addBlog(blog)
-    //     .subscribe(data => {
-    //       if (data) {
-    //         this.success = true;
-    //         this.successMsg = "Your Blog has been uploaded";
-    //       }
-    //     },
-    //     (err: HttpErrorResponse) => {
-    //       this.errorService.handleError(err);
-    //     });
-    // } else if (action === 'UPDATING') {
-    //   // console.log(blog)
-    //   conn = this.blogsService.updateBlog(blog, index)
-    //     .subscribe(data => {
-    //       if (data) {
-    //         this.success = true;
-    //         this.successMsg = "Your Blog has been updated";
-    //       }
-    //     },
-    //     (err: HttpErrorResponse) => {
-    //       this.errorService.handleError(err);
-    //     });
-    // } else if (action === 'DELETING') {
-    //   // console.log(blog)
-    //   conn = this.blogsService.deleteBlog(blog, index)
-    //     .subscribe(data => {
-    //       if (data) {
-    //         this.success = true;
-    //         this.successMsg = "Your Blog has been deleted";
-    //       }
-    //     },
-    //     (err: HttpErrorResponse) => {
-    //       this.errorService.handleError(err);
-    //     });
-    // }
-    // this.connArray.push(conn);
-    // form.reset();
-    // this.state = 'CREATING';
+    console.log( action, {blog:blog, index:index.value});
   }
   ngOnDestroy() {
     this.connArray.map((conn) => {

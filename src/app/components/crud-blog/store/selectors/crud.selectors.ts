@@ -1,29 +1,29 @@
 
 import { createSelector } from "@ngrx/store";
-import { Blog } from "../../../../models/blog";
+import * as fromCrud from "../reducers";
 
+export const getState = (state: fromCrud.State) => state;
 
-export const getState = (state: any) => state;
-
-export const getSelectedBlog = createSelector(getState, (state : any):Blog => {
-    if(state.crudBlog.crudBlog.blogUIState.index === undefined){
+export const getSelectedBlog = createSelector(getState, (state : fromCrud.State) => {
+    console.log(state)
+    if(state.crudState.crud.index === undefined){
       return;
     }
-    const blogId = state.crudBlog.crudBlog.blogUIState.index;
-    const newState = Object.assign({}, state);
-    const selectedBlog = newState.blogs[blogId]
+    const blogId = state.crudState.crud.index;
+    const selectedBlog = state.root.blogState.blogs[blogId];
+    console.log(state.root.blogState.blogs, blogId)
     return selectedBlog;
 
 })
 
 
 export const getBlogAction = ((state : any) => {
-// console.log(state.crudBlog.crudBlog.blogUIState)
-return state.crudBlog.crudBlog.blogUIState.uiState;
+// console.log(state.crudBlog.crudBlog)
+return state.crudState.crud.uiState;
 })
 
 
 export const getBlogIndex = (state : any) => {
     // console.log(state)
-    return state.crudBlog.crudBlog.blogUIState.index;
+    return state.crudState.crud.index;
     }

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Blog } from '../../../../models/blog';
-import { BlogUIState } from '../reducers/crud-blog.reducer';
+import { State } from '../reducers/crud-blog.reducer';
 import { BlogPayLoad } from '../../models/models';
 
 // TO BE IMPLEMENTED IF YOU DECIDE TO USE NG-RX
@@ -20,11 +20,12 @@ export const CRUD_SUCCESS_ACTION = 'CRUD_SUCCESS_ACTION';
 export const BLOG_ADDED_TO_DB_ACTION = 'BLOG_ADDED_TO_DB_ACTION';
 
 
+
 export class BlogSelectedAction implements Action {
 
     readonly type = BLOG_SELECTED_ACTION;
 
-    constructor(public payload:BlogUIState) {
+    constructor(public payload:State) {
        
     }
 
@@ -76,4 +77,5 @@ export class BlogAddedToDBAction implements Action {
        
     }
 }
+
 
