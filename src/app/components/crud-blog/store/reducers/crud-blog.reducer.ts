@@ -9,7 +9,7 @@ export interface State{
 }
 export const initialState:State = {
     id:'',
-    index:undefined,
+    index:null,
     uiState:'CREATING'
 }
 
@@ -42,7 +42,7 @@ function handleCrudSucessAction(state, action) {
     let newState = Object.assign({}, state);
     newState = {
         id: '',
-        index: undefined,
+        index: null,
         uiState: action.type
     }
     return newState;
