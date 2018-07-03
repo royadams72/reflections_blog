@@ -21,7 +21,7 @@ import { AlertService } from './components/alert/alert.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { BlogEffects } from './core/store/effects/blog.effects';
+
 
 import { BlogModule } from './components/blog/blog.module';
 import { reducers } from './reducers/';
@@ -52,9 +52,7 @@ import { reducers } from './reducers/';
     BlogModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
-    EffectsModule.forRoot([
-      BlogEffects
-    ])
+    EffectsModule.forRoot([])
   
   ],
   providers: [

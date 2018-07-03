@@ -1,19 +1,22 @@
 
-import * as fromCrud from './blog.reducer'
-import * as fromRoot from '../../../../reducers'
+import * as fromBlogs from './blogs.reducer';
+import * as fromBlogsUI from './blogUI.reducer'
+import * as fromRoot from '../../../../reducers';
 import { createFeatureSelector } from '@ngrx/store';
 
-export interface CrudState {
-    crud: fromCrud.State;
+export interface BlogState {
+    blogs: fromBlogs.State;
+    blogsUI:fromBlogsUI.State
   }
   
   export interface State extends fromRoot.State {
-    crudState: CrudState;
+    blogsState: BlogState;
+
   }
   
   export const reducers = {
-    crud: fromCrud.reducer,
-
+    blogs: fromBlogs.reducer,
+    blogsUI: fromBlogsUI.reducer
   };
 
-  export const selectCrudState = createFeatureSelector<CrudState>('crudState');
+  export const selectBlogsState = createFeatureSelector<BlogState>('blogsState');

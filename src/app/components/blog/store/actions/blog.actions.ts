@@ -1,33 +1,37 @@
 import { Action } from '@ngrx/store';
-import { State } from '../reducers/blog.reducer';
+
 import { BlogPayLoad } from '../../models/models';
+import { Blog } from '../../../../models/blog';
 
-// TO BE IMPLEMENTED IF YOU DECIDE TO USE NG-RX
 
-export const BLOG_SELECTED_ACTION = 'BLOG_SELECTED_ACTION';
+
+export const LOAD_BLOGS_ACTION = 'LOAD_BLOGS_ACTION';
+export const BLOGS_LOADED_ACTION = 'BLOGS_LOADED_ACTION';
 
 export const POPULATE_BLOG_FORM_ACTION = 'POPULATE_BLOG_FORM_ACTION';
-
 export const BLOG_UPDATED_ACTION = 'BLOG_UPDATED_ACTION';
-
 export const BLOG_DELETED_ACTION = 'BLOG_DELETED_ACTION';
-
 export const BLOG_ADDED_ACTION = 'BLOG_ADDED_ACTION';
-
-export const CRUD_SUCCESS_ACTION = 'CRUD_SUCCESS_ACTION';
 
 export const BLOG_ADDED_TO_DB_ACTION = 'BLOG_ADDED_TO_DB_ACTION';
 
 
+export class LoadBlogsAction implements Action {
 
-export class BlogSelectedAction implements Action {
+    readonly type = LOAD_BLOGS_ACTION;
 
-    readonly type = BLOG_SELECTED_ACTION;
-
-    constructor(public payload:State) {
+    constructor(public payload?:Blog[]) {
        
     }
 
+}
+export class BlogsLoadedAction implements Action {
+
+    readonly type = BLOGS_LOADED_ACTION;
+
+    constructor(public payload:Blog[]) {
+       
+    }
 }
 
 export class BlogUpdatedAction implements Action {
@@ -59,14 +63,7 @@ export class BlogAddedAction implements Action {
     }
 
 }
-export class CrudSucessAction implements Action {
 
-    readonly type = CRUD_SUCCESS_ACTION;
-
-    constructor(public payload:any) {
-       
-    }
-}
 
 export class BlogAddedToDBAction implements Action {
 
@@ -78,3 +75,4 @@ export class BlogAddedToDBAction implements Action {
 }
 
 
+export type Actions = LoadBlogsAction | BlogsLoadedAction | BlogUpdatedAction| BlogDeletedAction | BlogAddedAction | BlogAddedToDBAction

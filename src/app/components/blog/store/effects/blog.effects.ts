@@ -11,39 +11,55 @@ import * as fromRoot from '../../../../reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { BLOG_UPDATED_ACTION, BlogUpdatedAction, CrudSucessAction, BLOG_DELETED_ACTION, BlogDeletedAction, BlogAddedAction, BLOG_ADDED_ACTION, BlogAddedToDBAction } from '../actions/blog.actions';
+import * as fromBlogActions from '../actions/blog.actions';
+import * as fromBlogUIActions from '../actions/blogUI.actions';
 
 
 
 
 @Injectable()
-export class CrudBlogEffects {
+export class BlogEffects {
   constructor(private actions$: Actions, private blogService: BlogsService, private store$:Store<fromRoot.State>) {}
 
+  @Effect() blogs$: Observable<any> = this.actions$
+  .ofType<fromBlogActions.LoadBlogsAction>(fromBlogActions.LOAD_BLOGS_ACTION)
+  .switchMap(action => {
+      console.log(action)
+      return this.blogService.getBlogs();
+    })
+.map(blogs =>  {
+    console.log(blogs)
+//       _.chain(blogs)
+//   .keyBy('name')
+//   .mapValues('input')
+//   .value();
+    return new fromBlogActions.BlogsLoadedAction(blogs);
+});
+
   @Effect() updateBlog$: Observable<any> = this.actions$
-      .ofType<BlogUpdatedAction>(BLOG_UPDATED_ACTION)
+      .ofType<fromBlogActions.BlogUpdatedAction>(fromBlogActions.BLOG_UPDATED_ACTION)
         .mergeMap(action =>  {
             console.log(action)
         return this.blogService.updateBlog(action.payload.blog,action.payload.index)
         })
-        .map((action)=>new CrudSucessAction(action))
+        .map((action)=>new fromBlogUIActions.CrudSucessAction(action))
 
 
     @Effect() deleteBlog$: Observable<any> = this.actions$
-    .ofType<BlogDeletedAction>(BLOG_DELETED_ACTION)
+    .ofType<fromBlogActions.BlogDeletedAction>(fromBlogActions.BLOG_DELETED_ACTION)
         .switchMap(action =>  {
             console.log(action)
             return this.blogService.deleteBlog(action.payload.blog,action.payload.index)
         })
-        .map((action)=>new CrudSucessAction(action))
+        .map((action)=>new fromBlogUIActions.CrudSucessAction(action))
 
 
   @Effect() addBlog$: Observable<any> = this.actions$
-  .ofType<BlogAddedAction>(BLOG_ADDED_ACTION)
+  .ofType<fromBlogActions.BlogAddedAction>(fromBlogActions.BLOG_ADDED_ACTION)
     .mergeMap(action =>  {
         console.log(action)
     return this.blogService.addBlog(action.payload.blog)
-    .mergeMap((action)=>[new BlogAddedToDBAction(action), new CrudSucessAction(action)])
+    .mergeMap((action)=>[new fromBlogActions.BlogAddedToDBAction(action), new fromBlogUIActions.CrudSucessAction(action)])
     })
     
    

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getBlogs } from '../../core/store/selectors/blog.selectors';
+import { getBlogs } from './store/selectors/blog.selectors';
 import { Blog } from '../../models/blog';
 import { Observable } from 'rxjs';
 import { getSelectedBlog, getBlogAction, getBlogIndex } from './store/selectors/blog.selectors';
-import { BLOG_SELECTED_ACTION } from './store/actions/blog.actions';
+import * as fromBlogUI from './store/actions/blogUI.actions';
 import * as fromRoot from '../../reducers/';
 
 
@@ -35,7 +35,7 @@ export class CrudBlogComponent implements OnInit {
   }
 
 onBlogSelected(event) {
-    this.store.dispatch({type: BLOG_SELECTED_ACTION, payload: event});
+    this.store.dispatch({type: fromBlogUI.BLOG_SELECTED_ACTION, payload: event});
     // console.log({type: BLOG_SELECTED_ACTION, payload: eventPayload});
 }
 }

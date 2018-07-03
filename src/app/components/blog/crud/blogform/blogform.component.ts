@@ -25,7 +25,7 @@ export class BlogFormComponent implements OnInit {
   @Input() blogAction:string;
   @Input() blogIndex:string;
   @Output() onCrudAction:EventEmitter<{}> = new EventEmitter()
-  // crudTest$:Observable<crudBlogState>
+ 
   constructor() {
 
     // this.state = 'CREATING';

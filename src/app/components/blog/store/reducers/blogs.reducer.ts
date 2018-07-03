@@ -1,65 +1,68 @@
 import {Action} from "@ngrx/store";
-import { LOAD_BLOGS_ACTION, BLOGS_LOADED_ACTION } from "../actions/blog.actions";
-import { BLOG_UPDATED_ACTION, BLOG_DELETED_ACTION, BLOG_ADDED_ACTION, BLOG_ADDED_TO_DB_ACTION } from "../../../components/blog/store/actions/blog.actions";
 import * as _ from  "lodash";
-import { Blog } from "../../../models/blog";
+import * as blogActions from "../actions/blog.actions";
+import { Blog } from "../../../../models/blog";
 
-export interface State {
+
+export interface State{
     readonly loaded: boolean;
     readonly blogs: {[key:number]:Blog}
-  }
-  
-  export const initialState: State = {
+
+}
+export const initialState:State = {
     loaded:false,
     blogs: {}
-  };
-  
 
-export function reducer(state:State = initialState, action : Action):State {
+}
+
+
+export function reducer(state :State = initialState, action : Action) {
     switch (action.type) {
-        case LOAD_BLOGS_ACTION:
-            // console.log(state)
-            return handleLoadBlogsAction(state, action);
 
-        case BLOGS_LOADED_ACTION:
-            return handleBlogsLoadedAction(state, action);
+        case blogActions.LOAD_BLOGS_ACTION:
+        console.log(state)
+        return handleLoadBlogsAction(state, action);
 
-        case BLOG_UPDATED_ACTION:
-            return handleBlogUpdatedAction(state, action);
+    case blogActions.BLOGS_LOADED_ACTION:
+        return handleBlogsLoadedAction(state, action);
+    case blogActions.BLOG_UPDATED_ACTION:
+        return handleBlogUpdatedAction(state, action);
 
-        case BLOG_DELETED_ACTION:
-            return handleBlogDeletedAction(state, action);
+    case blogActions.BLOG_DELETED_ACTION:
+        return handleBlogDeletedAction(state, action);
 
-            case BLOG_ADDED_ACTION:
-            return handleBlogAddedAction(state, action);
+        case blogActions.BLOG_ADDED_ACTION:
+        return handleBlogAddedAction(state, action);
 
-            case BLOG_ADDED_TO_DB_ACTION:
-            console.log(state)
-            return handleBlogAddedToDBAction(state, action);
-
+        case blogActions.BLOG_ADDED_TO_DB_ACTION:
+        console.log(state)
+        return handleBlogAddedToDBAction(state, action);
+        // case blogActions.BLOG_SELECTED_ACTION:
+        //     return handleBlogSelectedAction(state, action);
+        // case blogActions.CRUD_SUCCESS_ACTION:
+        //     return handleCrudSucessAction(state, action)
         default:
             return state;
     }
 
 }
 
+
 function handleLoadBlogsAction(state, action) {
     //Must always return the state
     return state;
 }
 function handleBlogsLoadedAction(state, action) {
-    
-    // console.log(output);
-    console.log(state, action.payload)
-    let blog = Object.assign({},  action.payload);
+    // console.log(output)
+    let blogs = Object.assign({},  action.payload);
+    console.log(state, blogs)
     let newState = Object.assign({}, state);
      newState = {
         loaded:true,
-        blogs:blog
+        blogs:blogs
     }
     return newState;
 }
-
 function handleBlogUpdatedAction(state, action) {
     console.log(state.blogs)
     const index = action.payload.index;
@@ -98,4 +101,6 @@ function handleBlogAddedToDBAction(state, action) {
     return newState;
 }
 
-export const getBlogs = (state: State) => state.blogs;
+
+
+export const getBlogUIState = (state: State) => state;
