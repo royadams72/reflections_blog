@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BlogpageComponent } from './blogpage.component';
 import { ActivatedRoute } from '@angular/router';
-import { BlogsService } from '../../services/blogs.service';
+import { BlogsService } from '../../../services/blogs.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ActivatedRouteStub } from '../../../testing/activated.route';
+import { ActivatedRouteStub } from '../../../../testing/activated.route';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MockComponent } from '../../../testing/mock.component';
+import { MockComponent } from '../../../../testing/mock.component';
 class DummyComponent{
 
 }

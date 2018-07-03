@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BlogFormComponent } from './blogform.component';
-import { BlogsService } from '../../../services/blogs.service';
+import { BlogsService } from '../../../../services/blogs.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Blog } from '../../../models/blog';
+import { Blog } from '../../../../models/blog';
 describe('BlogFormComponent', () => {
   let component: BlogFormComponent;
   let fixture: ComponentFixture<BlogFormComponent>;
