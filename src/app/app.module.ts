@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { routing } from './app.routes';
+import { routing } from './routing/app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /*Components*/
 import { AppComponent } from './app.component';
-import { BlogsComponent } from './components/blogs/blogs.component';
+import { HomeComponent } from './components/home/home.component';
 import { NavComponent } from './components/nav/nav.component';
-import { BlogpageComponent } from './components/blogpage/blogpage.component';
+import { BlogpageComponent } from './components//blog/blogpage/blogpage.component';
 import { ErrorComponent } from './components/errors/error.component';
 import { LoginComponent } from './components/login/login.component';
 // import { AlertComponent } from './components/alert/alert.component';
@@ -23,7 +23,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { BlogEffects } from './core/store/effects/blog.effects';
 
-import { CrudModule } from './components/crud-blog/crud.module';
+import { BlogModule } from './components/blog/blog.module';
 import { reducers } from './reducers/';
 
 
@@ -36,7 +36,7 @@ import { reducers } from './reducers/';
 @NgModule({
   declarations: [
     AppComponent,
-    BlogsComponent,
+    HomeComponent,
     NavComponent,
     BlogpageComponent,
     LoginComponent,
@@ -49,7 +49,7 @@ import { reducers } from './reducers/';
     FormsModule,
     ReactiveFormsModule,
     routing,
-    CrudModule,
+    BlogModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([

@@ -1,5 +1,5 @@
 
-import * as fromCrud from './crud-blog.reducer'
+import * as fromCrud from './blog.reducer'
 import * as fromRoot from '../../../../reducers'
 import { createFeatureSelector } from '@ngrx/store';
 

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy , OnChanges, Output, EventEmitter} from '@angular/core';
-import { BlogsService } from '../../../services/blogs.service';
-import { Blog } from '../../../models/blog';
-import * as fromCrud  from '../store/reducers/crud-blog.reducer';
+import { Blog } from '../../../../models/blog';
+import * as fromCrud  from '../../store/reducers/blog.reducer';
 
 
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { BlogsService } from '../../services/blogs.service';
+import { BlogsService } from '../../../services/blogs.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import { Blog } from '../../models/blog';
+import { Blog } from '../../../models/blog';
 import 'rxjs/add/operator/mergeMap'
 @Component({
   selector: 'app-blogpage',

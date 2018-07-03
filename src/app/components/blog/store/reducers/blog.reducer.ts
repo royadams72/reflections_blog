@@ -1,5 +1,5 @@
 import {Action} from "@ngrx/store";
-import { BLOG_SELECTED_ACTION, CRUD_SUCCESS_ACTION } from "../actions/crud.actions";
+import { BLOG_SELECTED_ACTION, CRUD_SUCCESS_ACTION } from "../actions/blog.actions";
 
 
 export interface State{

@@ -11,7 +11,7 @@ import * as fromRoot from '../../../../reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { BLOG_UPDATED_ACTION, BlogUpdatedAction, CrudSucessAction, BLOG_DELETED_ACTION, BlogDeletedAction, BlogAddedAction, BLOG_ADDED_ACTION, BlogAddedToDBAction } from '../actions/crud.actions';
+import { BLOG_UPDATED_ACTION, BlogUpdatedAction, CrudSucessAction, BLOG_DELETED_ACTION, BlogDeletedAction, BlogAddedAction, BLOG_ADDED_ACTION, BlogAddedToDBAction } from '../actions/blog.actions';
 
 
 

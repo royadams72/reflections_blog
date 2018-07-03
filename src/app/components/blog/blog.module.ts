@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from "@angular/forms";
 import { Routes, RouterModule } from "@angular/router";
 
-import { CrudBlogComponent } from './crud-blog.component';
-import { BlogFormComponent } from './blogform/blogform.component';
-import { CrudListComponent } from './crud-list/crud-list.component';
+import { CrudBlogComponent } from './blog.component';
+import { BlogFormComponent } from './crud/blogform/blogform.component';
+import { CrudListComponent } from './crud/crud-list/crud-list.component';
 import { reducers } from "./store/reducers/"
 import { AlertModule, AccordionModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
@@ -40,4 +40,4 @@ const appRoutes: Routes = [
     CrudBlogComponent
   ]
 })
-export class CrudModule { }
+export class BlogModule { }

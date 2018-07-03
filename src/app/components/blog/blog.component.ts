@@ -3,15 +3,15 @@ import { Store } from '@ngrx/store';
 import { getBlogs } from '../../core/store/selectors/blog.selectors';
 import { Blog } from '../../models/blog';
 import { Observable } from 'rxjs';
-import { getSelectedBlog, getBlogAction, getBlogIndex } from './store/selectors/crud.selectors';
-import { BLOG_SELECTED_ACTION } from './store/actions/crud.actions';
+import { getSelectedBlog, getBlogAction, getBlogIndex } from './store/selectors/blog.selectors';
+import { BLOG_SELECTED_ACTION } from './store/actions/blog.actions';
 import * as fromRoot from '../../reducers/';
 
 
 @Component({
   selector: 'app-crud-blog',
-  templateUrl: './crud-blog.component.html',
-  styleUrls: ['./crud-blog.component.css']
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.css']
 })
 export class CrudBlogComponent implements OnInit {
   blogs$: Observable<Array<Blog>>;

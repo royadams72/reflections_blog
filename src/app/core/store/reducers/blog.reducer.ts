@@ -1,6 +1,6 @@
 import {Action} from "@ngrx/store";
 import { LOAD_BLOGS_ACTION, BLOGS_LOADED_ACTION } from "../actions/blog.actions";
-import { BLOG_UPDATED_ACTION, BLOG_DELETED_ACTION, BLOG_ADDED_ACTION, BLOG_ADDED_TO_DB_ACTION } from "../../../components/crud-blog/store/actions/crud.actions";
+import { BLOG_UPDATED_ACTION, BLOG_DELETED_ACTION, BLOG_ADDED_ACTION, BLOG_ADDED_TO_DB_ACTION } from "../../../components/blog/store/actions/blog.actions";
 import * as _ from  "lodash";
 import { Blog } from "../../../models/blog";
 

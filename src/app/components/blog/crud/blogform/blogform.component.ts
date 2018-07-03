@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { Blog } from '../../../models/blog';
+import { Blog } from '../../../../models/blog';
 
 
 

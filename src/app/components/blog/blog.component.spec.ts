@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MockComponent } from '../../../testing/mock.component';
-import { CrudBlogComponent } from './crud-blog.component';
+import { CrudBlogComponent } from './blog.component';
 import { BlogsService } from '../../services/blogs.service';
 describe('CrudBlogComponent', () => {
   let component: CrudBlogComponent;

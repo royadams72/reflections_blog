@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Blog } from '../../../../models/blog';
-import { State } from '../reducers/crud-blog.reducer';
+import { State } from '../reducers/blog.reducer';
 import { BlogPayLoad } from '../../models/models';
 
 // TO BE IMPLEMENTED IF YOU DECIDE TO USE NG-RX
