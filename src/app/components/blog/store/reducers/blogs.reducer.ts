@@ -37,10 +37,7 @@ export function reducer(state :State = initialState, action : Action) {
         case blogActions.BLOG_ADDED_TO_DB_ACTION:
         console.log(state)
         return handleBlogAddedToDBAction(state, action);
-        // case blogActions.BLOG_SELECTED_ACTION:
-        //     return handleBlogSelectedAction(state, action);
-        // case blogActions.CRUD_SUCCESS_ACTION:
-        //     return handleCrudSucessAction(state, action)
+
         default:
             return state;
     }
@@ -100,7 +97,5 @@ function handleBlogAddedToDBAction(state, action) {
     console.log(n);
     return newState;
 }
-
-
 
 export const getBlogUIState = (state: State) => state;

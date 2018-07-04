@@ -1,40 +1,45 @@
 
-import { createSelector } from "@ngrx/store";
+import { createSelector, createFeatureSelector } from "@ngrx/store";
 import * as fromBlogs from "../reducers";
 import * as _ from  "lodash";
-export const getState = (state: fromBlogs.State):fromBlogs.State => state;
+import { Blog } from "../../../../models/blog";
 
-export const getSelectedBlog = createSelector(getState, (state : fromBlogs.State) => {
-    console.log(state.blogsState.blogsUI.index)
-    if(state.blogsState.blogsUI.index === undefined){
+
+// export const getState = (state: fromBlogs.State) => state;
+export const getBlogsState = createFeatureSelector<fromBlogs.BlogState>('blogsState');
+
+export const getSelectedBlog = createSelector(getBlogsState, (state : fromBlogs.BlogState) => {
+    console.log(state)
+    if(state.blogsUI.index === undefined){
       return;
     }
-    const blogId = state.blogsState.blogsUI.index;
-    const selectedBlog = state.blogsState.blogs.blogs[blogId];
-    console.log(state.blogsState.blogs.blogs, blogId)
+    const blogId = state.blogsUI.index;
+    const selectedBlog = state.blogs.blogs[blogId];
     return selectedBlog;
 
 })
 
 
-export const getBlogAction = ((state : any) => {
+export const getBlogAction = createSelector(getBlogsState, (state : fromBlogs.BlogState) => {
+    if (state.blogsUI.uiState === '') {
+        return;
+    }
+    return state.blogsUI.uiState;
+})
 
-return state.blogsState.blogsUI.uiState;
+export const getBlogIndex = createSelector(getBlogsState, (state : fromBlogs.BlogState) => {
+    if (state.blogsUI.index === undefined) {
+        return;
+    }
+    return state.blogsUI.index;
 })
 
 
-export const getBlogIndex = (state : any) => {
-    if(state.blogsState === undefined){
+export const getBlogs = createSelector(getBlogsState, (state : fromBlogs.BlogState) => {
+    if (_.isEmpty(state.blogs.blogs)) {
         return;
-      }
-    return state.blogsState.blogsUI.index;
     }
-
-    export const getBlogs = createSelector(getState, (state) => {
-        if(state.blogsState === undefined){
-            return;
-          }
-        const loadedBlogs = _.values<any>(state.blogsState.blogs.blogs);
-        console.log(state.blogsState.blogs.blogs);
-        return loadedBlogs;
-    })
+    const loadedBlogs = _.values<Blog>(state.blogs.blogs);
+    // console.log(state.blogsState.blogs.blogs);
+    return loadedBlogs;
+})

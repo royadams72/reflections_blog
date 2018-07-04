@@ -2,7 +2,7 @@
 import * as fromBlogs from './blogs.reducer';
 import * as fromBlogsUI from './blogUI.reducer'
 import * as fromRoot from '../../../../reducers';
-import { createFeatureSelector } from '@ngrx/store';
+
 
 export interface BlogState {
     blogs: fromBlogs.State;
@@ -19,4 +19,4 @@ export interface BlogState {
     blogsUI: fromBlogsUI.reducer
   };
 
-  export const selectBlogsState = createFeatureSelector<BlogState>('blogsState');
+  // export const selectBlogsState = createFeatureSelector<BlogState>('blogsState');

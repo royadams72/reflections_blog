@@ -1,7 +1,7 @@
 import {Action} from "@ngrx/store";
 
 // import * as fromBlogUIActions from "../actions/blog.actions";
-import * as fromBlogUIActions from '../actions/blogUI.actions';
+import  {BLOG_SELECTED_ACTION, CRUD_SUCCESS_ACTION} from '../actions/blogUI.actions';
 
 
 export interface State{
@@ -17,10 +17,9 @@ export const initialState:State = {
 
 export function reducer(state :State = initialState, action : Action) {
     switch (action.type) {
- 
-        case fromBlogUIActions.BLOG_SELECTED_ACTION:
+        case BLOG_SELECTED_ACTION:
         return handleBlogSelectedAction(state, action);
-    case fromBlogUIActions.CRUD_SUCCESS_ACTION:
+    case CRUD_SUCCESS_ACTION:
         return handleCrudSucessAction(state, action)
         default:
             return state;
@@ -30,10 +29,8 @@ export function reducer(state :State = initialState, action : Action) {
 
 
 function handleBlogSelectedAction(state, action) {
-    console.log(state);
-    let newState = Object.assign({}, state);
-
-    newState = {
+   let newState = {
+       ...state,
         id: action.payload.id,
         index: action.payload.index,
         uiState: 'UPDATING'
@@ -42,10 +39,9 @@ function handleBlogSelectedAction(state, action) {
     return newState;
 }
 
-function handleCrudSucessAction(state, action) {
-    
-    let newState = Object.assign({}, state);
-    newState = {
+function handleCrudSucessAction(state, action) {  
+   let newState = {
+        ...state,
         id: '',
         index: null,
         uiState: action.type
