@@ -24,7 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 
 import { BlogModule } from './components/blog/blog.module';
-import { reducers } from './reducers/';
+import { reducers, initialState } from './reducers/';
 
 
 
@@ -50,7 +50,7 @@ import { reducers } from './reducers/';
     ReactiveFormsModule,
     routing,
     BlogModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, {initialState}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([])
   

@@ -6,7 +6,7 @@
         <div class="col-sm-6 col-md-4 card" *ngFor="let blog of (blogs$ | async)">
 
           <div class="crop" >
-            <a [routerLink]="['/blog', blog._id]">
+            <a [routerLink]="['/blog', blog._id]" (click)="onBlogSelected(blog._id)">
               <img class="bg-cover" src="http://img.youtube.com/vi/{{blog?.vidUrl}}/0.jpg" alt="" >
             </a>
           </div>
