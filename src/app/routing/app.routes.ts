@@ -6,9 +6,10 @@ import { BlogpageComponent } from '../components/blog/blogpage/blogpage.componen
 import { LoginComponent } from '../components/login/login.component';
 import { IsloggedinGuard } from '../routing/isloggedin.guard';
 // './auth/auth.module#AuthModule'
+//  canActivate: [IsloggedinGuard],
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent },
-  { path: "crudblog", canActivate: [IsloggedinGuard], loadChildren: './components/blog/blog.module#BlogModule' },
+  { path: "crudblog", loadChildren: './components/blog/blog.module#BlogModule' },
   { path: "blog/:id", component: BlogpageComponent },
   { path: "", component: HomeComponent },
   { path: "**", component: HomeComponent },

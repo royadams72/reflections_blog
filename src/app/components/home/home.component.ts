@@ -7,7 +7,6 @@ import { getBlogs } from '../blog/store/selectors/blog.selectors';
 
 import { CURRENT_BLOG_ID, CLOSE_SIDENAV, OPEN_SIDENAV, CurrentBlogID } from '../../core/store/actions/layout.actions';
 import { State } from '../../reducers';
-import { Root } from '../../reducers';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

@@ -13,87 +13,103 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { AUTH_CONFIG } from '../config-files/auth0-variables';
 // import Auth0Lock from 'auth0-lock'; // the fix
 import * as auth0 from 'auth0-js';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  private blogsURL: string = ENV.BASE_API;;
+  private blogsURL: string = ENV.BASE_API;
   private adminId: string;
   private username: string;
   private userState: any;
   loggedIn: boolean;
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-  auth0 = new auth0.WebAuth({
-    clientID: AUTH_CONFIG.CLIENT_ID,
-    domain: AUTH_CONFIG.CLIENT_DOMAIN,
-    responseType: 'token id_token',
-    audience: AUTH_CONFIG.AUDIENCE,
-    redirectUri: AUTH_CONFIG.REDIRECT,
-    scope: AUTH_CONFIG.SCOPE
-  });
+  // auth0 = new auth0.WebAuth({
+  //   clientID: AUTH_CONFIG.CLIENT_ID,
+  //   domain: AUTH_CONFIG.CLIENT_DOMAIN,
+  //   responseType: 'token id_token',
+  //   audience: AUTH_CONFIG.AUDIENCE,
+  //   redirectUri: AUTH_CONFIG.REDIRECT,
+  //   scope: AUTH_CONFIG.SCOPE
+  // });
   constructor(private http: HttpClient,
     private router: Router,
     private alertService: AlertService) {
 
-          if (this.authenticated) {
-            this.setLoggedIn(true);
-          }
+          // if (this.authenticated) {
+          //   this.setLoggedIn(true);
+          // }
 
   }
 
-  setLoggedIn(value: boolean) {
-    this.loggedIn$.next(value);
-    this.loggedIn = value;
-  }
-  login() {
-    this.auth0.authorize();
+  // setLoggedIn(value: boolean) {
+  //   this.loggedIn$.next(value);
+  //   this.loggedIn = value;
+  // }
+  // login(email, password) {
+  //   console.log(this.blogsURL + 'login');
+  //   console.log({email:email, password:password})
+  //   return this.http.post(this.blogsURL + 'login', {email:email, password:password} )
+  //   .map((res) => {
+  //     // let decodedData = jwt_decode(res)
+  //     console.log(res)
+  //     return res;
+  //   })
+  //   // this.auth0.authorize();
+  // }
+  login(email, password): Observable<any> {
+    let params = {email:email, password:password}
+    return this.http.post<any>(this.blogsURL + 'login', params)
+      .map((res: any) => {
+        console.log(res)
+        return res;
+      })//map automatic
   }
 
-
-  handleAuth() {
-    // When Auth0 hash parsed, get profile
-    this.auth0.parseHash((err, authResult) => {
-      //Use accessToken to protect API and client side resources
-      //Use idToken to get user info, used clienside only
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        window.location.hash = '';
-        this._getProfile(authResult);
-        this.router.navigate(['/']);
-      } else if (err) {
-        this.router.navigate(['/']);
-        console.error(`Error: ${err.error}`);
-      }
-    });
-  }
+  // handleAuth() {
+  //   // When Auth0 hash parsed, get profile
+  //   this.auth0.parseHash((err, authResult) => {
+  //     //Use accessToken to protect API and client side resources
+  //     //Use idToken to get user info, used clienside only
+  //     if (authResult && authResult.accessToken && authResult.idToken) {
+  //       window.location.hash = '';
+  //       this._getProfile(authResult);
+  //       this.router.navigate(['/']);
+  //     } else if (err) {
+  //       this.router.navigate(['/']);
+  //       console.error(`Error: ${err.error}`);
+  //     }
+  //   });
+  // }
   private _getProfile(authResult) {
     // Use access token to retrieve user's profile and set session
-    this.auth0.client.userInfo(authResult.accessToken, (err, profile, name) => {
-      console.log(name)
-      this._setSession(authResult, profile);
-    });
+    // this.auth0.client.userInfo(authResult.accessToken, (err, profile, name) => {
+    //   console.log(name)
+    //   this._setSession(authResult, profile);
+    // });
   }
 
-  private _setSession(authResult, profile) {
-    // Save session data and update login status subject
-    localStorage.setItem('token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('profile', JSON.stringify(profile));
-    this.setLoggedIn(true);
-  }
+  // private _setSession(authResult, profile) {
+  //   // Save session data and update login status subject
+  //   localStorage.setItem('token', authResult.accessToken);
+  //   localStorage.setItem('id_token', authResult.idToken);
+  //   localStorage.setItem('profile', JSON.stringify(profile));
+  //   // this.setLoggedIn(true);
+  // }
 
   logout() {
     // Remove tokens and profile and update login status subject
-    localStorage.removeItem('token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('profile');
-    this.router.navigate(['/']);
-    this.setLoggedIn(false);
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('id_token');
+    // localStorage.removeItem('profile');
+    // this.router.navigate(['/']);
+    // this.setLoggedIn(false);
   }
 
-  get authenticated() {
-    // Check if there's an unexpired access token
-    return tokenNotExpired('token');
-  }
+  // get authenticated() {
+  //   // Check if there's an unexpired access token
+  //   return tokenNotExpired('token');
+  // }
 
 }

@@ -11,7 +11,7 @@ import * as fromRoot from './reducers';
 export class AppComponent {
   constructor(public auth: AuthService, private store:Store<fromRoot.State>) {
     this.store.dispatch({type: fromBlogActions.LOAD_BLOGS_ACTION})
-    auth.handleAuth();
+    // auth.handleAuth();
   }
 
   ngOnInit() {

@@ -13,10 +13,10 @@ import { LoginComponent } from './components/login/login.component';
 // import { AlertComponent } from './components/alert/alert.component';
 /*Services*/
 import { ErrorService } from './components//errors/error.service';
-import { TokenInterceptor } from './services/token.interceptor';
+// import { TokenInterceptor } from './services/token.interceptor';
 import { BlogsService } from './services/blogs.service';
 import { AuthService } from './services/auth.service';
-import { IsloggedinGuard } from './routing/isloggedin.guard';
+// import { IsloggedinGuard } from './routing/isloggedin.guard';
 import { AlertService } from './components/alert/alert.service';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -58,14 +58,14 @@ import { reducers, initialState } from './reducers/';
   providers: [
     BlogsService,
     AuthService,
-    IsloggedinGuard,
+    // IsloggedinGuard,
     ErrorService,
     AlertService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // }
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent]
