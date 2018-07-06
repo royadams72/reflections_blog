@@ -9,7 +9,7 @@ import { Blog } from "../../../../models/blog";
 export const getBlogsState = createFeatureSelector<fromBlogs.BlogState>('blogsState');
 
 export const getSelectedBlog = createSelector(getBlogsState, (state : fromBlogs.BlogState) => {
-    console.log(state)
+    // console.log(state)
     if(state.blogsUI.index === undefined){
       return;
     }

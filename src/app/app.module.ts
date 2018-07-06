@@ -24,7 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 
 import { BlogModule } from './components/blog/blog.module';
-import { reducers, initialState } from './reducers/';
+import { reducers, initialState, metaReducers } from './reducers/';
 import { LoginEffects } from './core/store/effects/login.effects';
 
 
@@ -51,7 +51,7 @@ import { LoginEffects } from './core/store/effects/login.effects';
     ReactiveFormsModule,
     routing,
     BlogModule,
-    StoreModule.forRoot(reducers, {initialState}),
+    StoreModule.forRoot(reducers, {initialState, metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     EffectsModule.forRoot([LoginEffects])
   

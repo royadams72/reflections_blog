@@ -37,7 +37,7 @@ export class BlogFormComponent implements OnInit {
   }
   ngOnChanges(){
     // console.log(this.blogAction)
-    console.log(this.selectedBlog)
+    // console.log(this.selectedBlog)
 
     if (this.blogAction == "CRUD_SUCCESS_ACTION"){
       this.crudBlogForm.reset();
@@ -84,7 +84,7 @@ export class BlogFormComponent implements OnInit {
     // action === 'CREATING' ? vidID = null : vidID = this._id;
     let blog:Blog = { _id: _id.value, title: title.value, vidUrl: vidUrl.value, script: script.value }
     this.onCrudAction.emit({ action:action, payload:{blog:blog, index:index.value}})
-    console.log( action, {blog:blog, index:index.value});
+    // console.log( action, {blog:blog, index:index.value});
   }
   ngOnDestroy() {
     this.connArray.map((conn) => {

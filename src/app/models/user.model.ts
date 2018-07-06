@@ -5,3 +5,7 @@ export interface User {
     token?: string;
     password?: string;
   }
+
+  export interface LoggedInUser{
+    
+  }

@@ -22,7 +22,7 @@ export class BlogsService {
   getBlogs(): Observable<Blog[]> {
     return this.http.get<Blog[]>(this.blogsURL + 'blogs')
       .map((res: Blog[]) => {
-        console.log(res['blogs'])
+        // console.log(res['blogs'])
         return res['blogs'];
       })
   }
@@ -68,7 +68,7 @@ export class BlogsService {
     return this.http.delete(this.blogsURL + 'blogs/edit/' + id, httpOptions)
       .map((res) => {
           const result = res;
-          console.log(result);
+          // console.log(result);
           return result;
        
       }).catch( error => {

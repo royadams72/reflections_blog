@@ -17,7 +17,7 @@ export class CrudListComponent {
   constructor() {}
   
 ngOnChanges(){
-  console.log(this.blogs)
+  // console.log(this.blogs)
 }
 
   populateForm(id: string, index:number) {

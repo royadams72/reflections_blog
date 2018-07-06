@@ -20,7 +20,7 @@ export function reducer(state :State = initialState, action : Action) {
     switch (action.type) {
 
         case blogActions.LOAD_BLOGS_ACTION:
-        console.log(state)
+        // console.log(state)
         return handleLoadBlogsAction(state, action);
 
     case blogActions.BLOGS_LOADED_ACTION:
@@ -52,7 +52,7 @@ function handleLoadBlogsAction(state, action) {
 function handleBlogsLoadedAction(state, action) {
     // console.log(output)
     let blogs = Object.assign({},  action.payload);
-    console.log(state, blogs)
+    // console.log(state, blogs)
     let newState = Object.assign({}, state);
      newState = {
         loaded:true,
@@ -61,7 +61,7 @@ function handleBlogsLoadedAction(state, action) {
     return newState;
 }
 function handleBlogUpdatedAction(state, action) {
-    console.log(state.blogs)
+    // console.log(state.blogs)
     const index = action.payload.index;
     let newState = Object.assign({}, state);
     const blogs = Object.assign({}, state.blogs);
@@ -70,7 +70,7 @@ function handleBlogUpdatedAction(state, action) {
         loaded:newState.loaded,
         blogs: blogs
     }
-    console.log(blogs[index])
+    // console.log(blogs[index])
     return newState;
 }
 
@@ -94,7 +94,7 @@ function handleBlogAddedToDBAction(state, action) {
         ...state
     }
     newState.blogs[index] = action.payload
-    console.log(n);
+    // console.log(n);
     return newState;
 }
 

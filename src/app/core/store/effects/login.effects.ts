@@ -9,7 +9,7 @@ import { LogIn, LOGIN, LogInSuccess, LOGIN_FAILURE, LogInFailure, LOGIN_SUCCESS 
 import { State } from '../../../reducers';
 import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
-
+import * as loginReducer from '../reducers/login.reducers'
 @Injectable()
 export class LoginEffects {
   constructor(private actions$: Actions,
@@ -21,13 +21,17 @@ export class LoginEffects {
     .pipe(
       ofType<LogIn>(LOGIN),
       mergeMap(action => {
-    
       return this.authService.login(action.payload.email, action.payload.password)
       .pipe(
-        map((user)=> {
-          console.log(user, action.payload.email);
-         return new LogInSuccess({token:user.token, email:action.payload.email})
-        
+        map((data)=> {
+           //Decode the returned jwt
+          let decodedData = jwt_decode(data.token)
+          let userState:loginReducer.State = {
+            isAuthenticated: true,
+            token:data.token,
+            name:decodedData.name
+          }
+         return new LogInSuccess(userState)
         }),
         catchError((error) => {
             return Observable.of(new LogInFailure({ error: error }));
@@ -45,10 +49,10 @@ export class LoginEffects {
   .pipe(
     ofType<LogInSuccess>(LOGIN_SUCCESS),
     tap((user) => {
-      let decodedData = jwt_decode(user.payload.token)
-      console.log(decodedData.name)
-      localStorage.setItem('token', user.payload.token);
-      localStorage.setItem('userNmae', decodedData.name);
+    console.log(user)
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('name', user.name);
+      localStorage.setItem('isAuthenticated', user.isAuthenticated);
       // this.router.navigateByUrl('/');
     })
   )
