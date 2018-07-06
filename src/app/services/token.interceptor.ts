@@ -20,7 +20,8 @@ export class TokenInterceptor implements HttpInterceptor {
       return next.handle(cloned);
     }
     else {
-      console.log('NO TOKEN')
+      console.log('NO TOKEN');
+    //Throw error etc.
       return next.handle(req);
     }
   }

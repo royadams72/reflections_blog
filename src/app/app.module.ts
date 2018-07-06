@@ -25,6 +25,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { BlogModule } from './components/blog/blog.module';
 import { reducers, initialState } from './reducers/';
+import { LoginEffects } from './core/store/effects/login.effects';
 
 
 
@@ -52,7 +53,7 @@ import { reducers, initialState } from './reducers/';
     BlogModule,
     StoreModule.forRoot(reducers, {initialState}),
     StoreDevtoolsModule.instrument({maxAge: 25}),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([LoginEffects])
   
   ],
   providers: [
