@@ -46,7 +46,7 @@ export class AuthService {
     return this.http.post<any>(this.blogsURL + 'login', params)
       .map((res: any) => {
         //  let decodedData = jwt_decode(res)
-        console.log(res)
+        console.log(`${res} response from server`)
         return res;
       })//map automatic
   }

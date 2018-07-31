@@ -11,7 +11,7 @@ export class LogIn implements Action {
     }
   }
 
-  export class LogInSuccess implements Action {
+  export class LoginSuccess implements Action {
     readonly type = LOGIN_SUCCESS;
     constructor(public payload: State) {}
   }
@@ -23,5 +23,5 @@ export class LogIn implements Action {
 
   export type Actions =
   | LogIn
-  | LogInSuccess
+  | LoginSuccess
   | LogInFailure;

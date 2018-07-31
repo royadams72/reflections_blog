@@ -35,17 +35,17 @@ describe('BlogsComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-  it('Should set blogs variable with values from service', () => {
+//   it('Should set blogs variable with values from service', () => {
 
-  let spy = spyOn(blogsService, 'getBlogs').and.callFake(()=>{
+//   // let spy = spyOn(blogsService, 'getBlogs').and.callFake(()=>{
     
-    return Observable.from([[{id1: 1, title: 'a'}, {id1: 2, title: 'b'}]])
-  })
-  component.ngOnInit();
-  // do stuff
-  // console.log(component.blogs)
-  // expect(component.blogs$.length).toBeGreaterThan(0);
-  });
+//   //   return Observable.from([[{id1: 1, title: 'a'}, {id1: 2, title: 'b'}]])
+//   // })
+//   // component.ngOnInit();
+//   // // do stuff
+//   // // console.log(component.blogs)
+//   // // expect(component.blogs$.length).toBeGreaterThan(0);
+//   // });
 
 
 });

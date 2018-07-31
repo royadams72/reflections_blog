@@ -5,7 +5,7 @@ import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
-import { LogIn, LOGIN, LogInSuccess, LOGIN_FAILURE, LogInFailure, LOGIN_SUCCESS } from '../actions/login.actions';
+import { LogIn, LOGIN, LoginSuccess, LOGIN_FAILURE, LogInFailure, LOGIN_SUCCESS } from '../actions/login.actions';
 import { State } from '../../../reducers';
 import { Router } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
@@ -14,7 +14,6 @@ import * as loginReducer from '../reducers/login.reducers'
 export class LoginEffects {
   constructor(private actions$: Actions,
               private authService: AuthService,
-              private store$:Store<State>,
               private router: Router) {}
 
 @Effect() login$: Observable<any> = this.actions$
@@ -25,13 +24,17 @@ export class LoginEffects {
       .pipe(
         map((data)=> {
            //Decode the returned jwt
-          let decodedData = jwt_decode(data.token)
+           console.log(data);
+          // let decodedData = jwt_decode(data.token);
+          // console.log(decodedData)
+         console.log(data);
           let userState:loginReducer.State = {
             isAuthenticated: true,
             token:data.token,
-            name:decodedData.name
+            name:data.name
           }
-         return new LogInSuccess(userState)
+          console.log(userState)
+         return new LoginSuccess(userState)
         }),
         catchError((error) => {
             return Observable.of(new LogInFailure({ error: error }));
@@ -47,7 +50,7 @@ export class LoginEffects {
 
   @Effect({dispatch:false}) logInSuccess$: Observable<any> = this.actions$
   .pipe(
-    ofType<LogInSuccess>(LOGIN_SUCCESS),
+    ofType<LoginSuccess>(LOGIN_SUCCESS),
     tap((user) => {
     console.log(user)
       localStorage.setItem('token', user.token);

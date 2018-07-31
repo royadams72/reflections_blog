@@ -16,7 +16,6 @@ export class BlogFormComponent implements OnInit {
   public state: string;
   public crudBlogForm: FormGroup;
   private formValid: boolean;
-  // public success: boolean;
   private successMsg: String;
   public _id: String;
   private connArray: Array<Subscription> = [];
@@ -28,16 +27,14 @@ export class BlogFormComponent implements OnInit {
  
   constructor() {
 
-    // this.state = 'CREATING';
-    this.formValid = false;
-    // this.success = false;
+
   }
   ngOnInit() {
     this.initForm();
   }
   ngOnChanges(){
     // console.log(this.blogAction)
-    // console.log(this.selectedBlog)
+    console.log(this.selectedBlog)
 
     if (this.blogAction == "CRUD_SUCCESS_ACTION"){
       this.crudBlogForm.reset();
