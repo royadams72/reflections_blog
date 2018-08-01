@@ -1,6 +1,8 @@
 // TO BE IMPLEMENTED IF YOU DECIDE TO USE NG-RX
 import { Injectable } from '@angular/core';
 import {Actions, Effect} from "@ngrx/effects";
+
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/withLatestFrom';
@@ -8,19 +10,21 @@ import 'rxjs/add/operator/withLatestFrom';
 import { BlogsService } from '../../../../services/blogs.service';
 
 import * as fromRoot from '../../../../reducers';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+
 
 import * as fromBlogActions from '../actions/blog.actions';
 import * as fromBlogUIActions from '../actions/blogUI.actions';
+import { SocketService } from '../../../../services/socket.service';
 
 
 
 
 @Injectable()
 export class BlogEffects {
-  constructor(private actions$: Actions, private blogService: BlogsService, private store$:Store<fromRoot.State>) {}
-
+  constructor(private actions$: Actions,
+              private blogService: BlogsService,
+              private socketService:SocketService) {}
+  
   @Effect() blogs$: Observable<any> = this.actions$
   .ofType<fromBlogActions.LoadBlogsAction>(fromBlogActions.LOAD_BLOGS_ACTION)
   .switchMap(action => {
@@ -39,7 +43,8 @@ export class BlogEffects {
   @Effect() updateBlog$: Observable<any> = this.actions$
       .ofType<fromBlogActions.BlogUpdatedAction>(fromBlogActions.BLOG_UPDATED_ACTION)
         .mergeMap(action =>  {
-            // console.log(action)
+            this.socketService.socket$.next(JSON.stringify('test'))
+            console.log(action)
         return this.blogService.updateBlog(action.payload.blog,action.payload.index)
         })
         .map((action)=>new fromBlogUIActions.CrudSucessAction(action))

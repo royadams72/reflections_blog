@@ -34,7 +34,7 @@ export class BlogFormComponent implements OnInit {
   }
   ngOnChanges(){
     // console.log(this.blogAction)
-    console.log(this.selectedBlog)
+    // console.log(this.selectedBlog)
 
     if (this.blogAction == "CRUD_SUCCESS_ACTION"){
       this.crudBlogForm.reset();

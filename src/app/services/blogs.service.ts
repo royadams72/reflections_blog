@@ -7,13 +7,13 @@ import { Subject } from 'rxjs/Subject';
 
 import { Blog } from '../models/blog';
 import { ENV } from '../app.config';
-import { RequestOptions } from '@angular/http';
+
 @Injectable()
 export class BlogsService {
   private blogsURL: string;
   public populateList;
   public populateForm;
-  private headers = new Headers({ 'Content-Type': 'application/json' });
+  // private headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) {
     this.blogsURL = ENV.BASE_API;
   }
@@ -39,7 +39,7 @@ export class BlogsService {
     return this.http.patch<Blog>(this.blogsURL + 'blogs/edit', blog)
       .map((res:Blog) => {
         if (res) {
-          console.log(res)
+          // console.log(res)
           // this.blogs.splice(index, 1, blog);
           return blog;
         }

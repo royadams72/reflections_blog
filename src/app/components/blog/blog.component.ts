@@ -29,7 +29,7 @@ export class CrudBlogComponent implements OnInit {
 
   }
   onBlogUpdate(event){
-    console.log(event)
+    // console.log(event)
     this.store.dispatch({type:event.action, payload:event.payload})
 
   }

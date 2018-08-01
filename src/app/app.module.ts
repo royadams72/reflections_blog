@@ -16,6 +16,7 @@ import { ErrorService } from './components//errors/error.service';
 // import { TokenInterceptor } from './services/token.interceptor';
 import { BlogsService } from './services/blogs.service';
 import { AuthService } from './services/auth.service';
+import { SocketService } from './services/socket.service';
 // import { IsloggedinGuard } from './routing/isloggedin.guard';
 import { AlertService } from './components/alert/alert.service';
 import { StoreModule } from '@ngrx/store';
@@ -62,6 +63,7 @@ import { LoginEffects } from './core/store/effects/login.effects';
     // IsloggedinGuard,
     ErrorService,
     AlertService,
+    SocketService
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: TokenInterceptor,
