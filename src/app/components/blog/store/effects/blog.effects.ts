@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/operator/filter';
 
 import { BlogsService } from '../../../../services/blogs.service';
 
@@ -14,6 +15,7 @@ import { BlogsService } from '../../../../services/blogs.service';
 import * as fromBlogActions from '../actions/blog.actions';
 import * as fromBlogUIActions from '../actions/blogUI.actions';
 import { SocketService } from '../../../../services/socket.service';
+import { BlogPayLoad } from '../../models/models';
 
 
 
@@ -23,13 +25,7 @@ export class BlogEffects {
     socketData;
   constructor(private actions$: Actions,
               private blogService: BlogsService,
-              private socketService:SocketService) {
-                // this.socketService.getMessage().subscribe((data)=>{
-                //     this.socketData = data;
-                //     console.log(this.socketData)
-                // })
-
-              }
+              private socketService:SocketService) {}
   
   @Effect() blogs$: Observable<any> = this.actions$
   .ofType<fromBlogActions.LoadBlogsAction>(fromBlogActions.LOAD_BLOGS_ACTION)
@@ -45,7 +41,7 @@ export class BlogEffects {
       .ofType<fromBlogActions.BlogUpdatedAction>(fromBlogActions.BLOG_UPDATED_ACTION)
         .mergeMap(action =>  {
             
-            console.log(action.payload['blog'])
+            // console.log(action.payload['blog'])
             // this.socketService.socket$.next(JSON.stringify(action))
             // this.socketService.updateBlog(action)
         return this.blogService.updateBlog(action.payload.blog,action.payload.index)
@@ -71,18 +67,36 @@ export class BlogEffects {
     })
     
     @Effect({dispatch:false}) beginUpdate$: Observable<any> = this.actions$
-    .ofType<fromBlogActions.BlogUpdateStartAction>(fromBlogActions.BLOG_UPDATE_START_ACTION)
+    .ofType(fromBlogActions.BLOG_UPDATE_START_ACTION, fromBlogActions.BLOG_DELETE_START_ACTION)
     .map((action:any)=>{
         console.log(action)
-        return action.payload;
+        return action;
     })
     .do((action)=> this.socketService.socket$.next(JSON.stringify(action)))
     // .map((action)=>new fromBlogActions.BlogUpdatedAction(action))
 
-    @Effect() watchSocket = this.socketService.socket$
-    .map((action)=>{
-        console.log(action)
+    @Effect() watchSocket$ = this.socketService.socket$
+    .map((action:any)=>{
+        console.log(action.type)
         return action
     })
-    .map((action)=> new fromBlogActions.BlogUpdatedAction(action))
+    .filter(action=>action.type===fromBlogActions.BLOG_UPDATE_START_ACTION)
+    .mergeMap((action)=> {
+    let payload = action.payload
+     return [new fromBlogActions.BlogUpdatedAction(payload)]})
+     
+     @Effect() watchSocketForDel$ = this.socketService.socket$
+     .map((action:any)=>{
+         console.log(action.type)
+         return action
+     })
+     .filter(action=>action.type===fromBlogActions.BLOG_DELETE_START_ACTION)
+     .mergeMap((action)=> {
+     let payload = action.payload
+      return [new fromBlogActions.BlogDeletedAction(payload)]})
+
+      @Effect()  onlyTheRightThings$ = this.watchSocket$
+                .merge(
+                    this.watchSocketForDel$
+                )
 }

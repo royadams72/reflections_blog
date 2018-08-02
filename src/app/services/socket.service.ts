@@ -7,7 +7,7 @@ export class SocketService {
   socket$ = Observable.webSocket( 'ws://localhost:8081');
   socketMessage$:Observable<any>;
   // 'ws://echo.websocket.org/'
-  constructor(private store:Store<fromRoot.State>) {
+  constructor() {
       // this.connectToSocket()
    }
 
