@@ -9,6 +9,7 @@ export const LOAD_BLOGS_ACTION = 'LOAD_BLOGS_ACTION';
 export const BLOGS_LOADED_ACTION = 'BLOGS_LOADED_ACTION';
 
 export const POPULATE_BLOG_FORM_ACTION = 'POPULATE_BLOG_FORM_ACTION';
+export const BLOG_UPDATE_START_ACTION = 'BLOG_UPDATE_START_ACTION';
 export const BLOG_UPDATED_ACTION = 'BLOG_UPDATED_ACTION';
 export const BLOG_DELETED_ACTION = 'BLOG_DELETED_ACTION';
 export const BLOG_ADDED_ACTION = 'BLOG_ADDED_ACTION';
@@ -38,7 +39,7 @@ export class BlogUpdatedAction implements Action {
 
     readonly type = BLOG_UPDATED_ACTION;
 
-    constructor(public payload:BlogPayLoad) {
+    constructor(public payload:any) {
        
     }
 
@@ -73,6 +74,14 @@ export class BlogAddedToDBAction implements Action {
        
     }
 }
+export class BlogUpdateStartAction implements Action {
 
+    readonly type = BLOG_UPDATE_START_ACTION;
 
-export type Actions = LoadBlogsAction | BlogsLoadedAction | BlogUpdatedAction| BlogDeletedAction | BlogAddedAction | BlogAddedToDBAction
+    constructor(public payload:any) {
+       
+    }
+
+}
+
+export type Actions = LoadBlogsAction | BlogsLoadedAction | BlogUpdatedAction| BlogDeletedAction | BlogAddedAction | BlogAddedToDBAction | BlogUpdateStartAction;

@@ -29,7 +29,7 @@
                         <div class="container">
                           <div *ngIf="blogAction === 'UPDATING' " class="row text-center">
                           <div class="col-md-6">
-                              <button type="button" class="btn btn-lg btn-primary mgb-5" (click)="onSubmitForm('BLOG_UPDATED_ACTION')" [disabled]="!crudBlogForm.valid">Update Entry</button>
+                              <button type="button" class="btn btn-lg btn-primary mgb-5" (click)="onSubmitForm('BLOG_UPDATE_START_ACTION')" [disabled]="!crudBlogForm.valid">Update Entry</button>
                           </div>
                           <div class="col-md-6">
                               <button type="button" class="btn btn-lg btn-danger" (click)="onSubmitForm('BLOG_DELETED_ACTION')" [disabled]="!crudBlogForm.valid">Delete Entry</button>
