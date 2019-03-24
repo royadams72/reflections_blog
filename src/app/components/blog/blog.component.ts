@@ -23,13 +23,14 @@ export class CrudBlogComponent implements OnInit {
     this.selectedBlog$ = store.select(getSelectedBlog);
     this.blogAction$ = store.select(getBlogAction)
     this.blogIndex$ = store.select(getBlogIndex)
+    // console.log(this.blogs$, this.selectedBlog$, this.blogAction$, this.blogIndex$)
   }
 
   ngOnInit() {
 
   }
   onBlogUpdate(event){
-    console.log(event)
+    // console.log(event)
     this.store.dispatch({type:event.action, payload:event.payload})
 
   }
